@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "1021628575366",
+    "project_id": "alianza-b7y88v",
+    "storage_bucket": "alianza-b7y88v.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1021628575366:android:e81fb1aebee72ca7b7eb07",
+        "android_client_info": {
+          "package_name": "com.mycompany.alicard"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAMzpp5ZoPmU7M26I6k_A0zSX7B8-tleOA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1021628575366:android:37cc74272f37e2a5b7eb07",
+        "android_client_info": {
+          "package_name": "com.mycompany.alicard2"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAMzpp5ZoPmU7M26I6k_A0zSX7B8-tleOA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

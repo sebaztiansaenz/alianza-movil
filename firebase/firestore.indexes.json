@@ -1,0 +1,86 @@
+{
+  "indexes": [
+    {
+      "collectionGroup": "ahorros",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "user",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "AhorrosDocPdf1",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "transactions",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "ahorrosId",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "transactionType",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "status",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "transactions",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "ahorrosId",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "firebaseDate",
+          "order": "DESCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "ahorros",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "service_",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "user",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "AhorrosDocPdf1",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "Cdats",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "firmado",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "Idusuario",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "firma",
+          "order": "ASCENDING"
+        }
+      ]
+    }
+  ]
+}
