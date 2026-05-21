@@ -79,6 +79,30 @@ class _AhorroTransactionsCopy2WidgetState
     super.dispose();
   }
 
+  DateTime? _oldestTransactionDate(List<TransactionsRecord> transactions) {
+    for (var i = transactions.length - 1; i >= 0; i--) {
+      final date = transactions[i].firebaseDate;
+      if (date != null) {
+        return date;
+      }
+    }
+    return null;
+  }
+
+  bool _isTransactionInMonth(
+    TransactionsRecord record,
+    DateTime month,
+  ) {
+    final date = record.firebaseDate;
+    if (date == null) {
+      return false;
+    }
+    return functions.isSameMonthCopy(date, month);
+  }
+
+  double get _totalSavingsPreApproval =>
+      widget.ahorroDoc?.totalSavingsPreApproval ?? 0.0;
+
   @override
   Widget build(BuildContext context) {
     context.watch<FFAppState>();
@@ -184,15 +208,14 @@ class _AhorroTransactionsCopy2WidgetState
                           0)
                         Builder(
                           builder: (context) {
-                            final months = functions
-                                .monthsTillDate(
-                                    ahorroTransactionsCopy2TransactionsRecordList
-                                        .elementAtOrNull(
-                                            ahorroTransactionsCopy2TransactionsRecordList
-                                                    .length -
-                                                1)!
-                                        .firebaseDate!)
-                                .toList();
+                            final oldestDate = _oldestTransactionDate(
+                              ahorroTransactionsCopy2TransactionsRecordList,
+                            );
+                            if (oldestDate == null) {
+                              return const SizedBox.shrink();
+                            }
+                            final months =
+                                functions.monthsTillDate(oldestDate).toList();
 
                             return ListView.builder(
                               padding: EdgeInsets.zero,
@@ -207,12 +230,9 @@ class _AhorroTransactionsCopy2WidgetState
                                   children: [
                                     if (ahorroTransactionsCopy2TransactionsRecordList
                                             .where((e) =>
-                                                functions.isSameMonthCopy(
-                                                    e.firebaseDate!,
-                                                    monthsItem))
-                                            .toList()
-                                            .length >
-                                        0)
+                                                _isTransactionInMonth(
+                                                    e, monthsItem))
+                                            .isNotEmpty)
                                       Align(
                                         alignment:
                                             AlignmentDirectional(-1.0, -1.0),
@@ -248,12 +268,9 @@ class _AhorroTransactionsCopy2WidgetState
                                       ),
                                     if (ahorroTransactionsCopy2TransactionsRecordList
                                             .where((e) =>
-                                                functions.isSameMonthCopy(
-                                                    e.firebaseDate!,
-                                                    monthsItem))
-                                            .toList()
-                                            .length >
-                                        0)
+                                                _isTransactionInMonth(
+                                                    e, monthsItem))
+                                            .isNotEmpty)
                                       Padding(
                                         padding: EdgeInsetsDirectional.fromSTEB(
                                             24.0, 24.0, 24.0, 0.0),
@@ -261,10 +278,9 @@ class _AhorroTransactionsCopy2WidgetState
                                           builder: (context) {
                                             final ahorroTransactionsVar =
                                                 ahorroTransactionsCopy2TransactionsRecordList
-                                                    .where((e) => functions
-                                                        .isSameMonthCopy(
-                                                            e.firebaseDate!,
-                                                            monthsItem))
+                                                    .where((e) =>
+                                                        _isTransactionInMonth(
+                                                            e, monthsItem))
                                                     .toList();
 
                                             return ListView.builder(
@@ -508,7 +524,7 @@ class _AhorroTransactionsCopy2WidgetState
                                                                           String>(
                                                                         () {
                                                                           if ((ahorroTransactionsVarItem.transactionType == 'Depositado') &&
-                                                                              (widget!.ahorroDoc!.totalSavingsPreApproval >
+                                                                              (_totalSavingsPreApproval >
                                                                                   0.0)) {
                                                                             return 'Deposito';
                                                                           } else if (ahorroTransactionsVarItem.transactionType ==
@@ -535,7 +551,7 @@ class _AhorroTransactionsCopy2WidgetState
                                                                             color:
                                                                                 valueOrDefault<Color>(
                                                                               () {
-                                                                                if ((ahorroTransactionsVarItem.transactionType == 'Depositado') && (widget!.ahorroDoc!.totalSavingsPreApproval > 0.0)) {
+                                                                                if ((ahorroTransactionsVarItem.transactionType == 'Depositado') && (_totalSavingsPreApproval > 0.0)) {
                                                                                   return Color(0xFF002CE9);
                                                                                 } else if (ahorroTransactionsVarItem.transactionType == 'Depositado') {
                                                                                   return Color(0xFF002CE9);
@@ -558,13 +574,14 @@ class _AhorroTransactionsCopy2WidgetState
                                                                     AutoSizeText(
                                                                       valueOrDefault<
                                                                           String>(
-                                                                        '${dateTimeFormat(
-                                                                          "d",
-                                                                          ahorroTransactionsVarItem
-                                                                              .firebaseDate,
-                                                                          locale:
-                                                                              FFLocalizations.of(context).languageCode,
-                                                                        )} ${functions.monthInSpanish(ahorroTransactionsVarItem.firebaseDate!)}',
+                                                                        ahorroTransactionsVarItem.firebaseDate !=
+                                                                                null
+                                                                            ? '${dateTimeFormat(
+                                                                                "d",
+                                                                                ahorroTransactionsVarItem.firebaseDate,
+                                                                                locale: FFLocalizations.of(context).languageCode,
+                                                                              )} ${functions.monthInSpanish(ahorroTransactionsVarItem.firebaseDate!)}'
+                                                                            : '-',
                                                                         '-',
                                                                       ),
                                                                       textAlign:
@@ -617,7 +634,7 @@ class _AhorroTransactionsCopy2WidgetState
                                                                             color:
                                                                                 valueOrDefault<Color>(
                                                                               () {
-                                                                                if ((ahorroTransactionsVarItem.transactionType == 'Depositado') && (widget!.ahorroDoc!.totalSavingsPreApproval > 0.0)) {
+                                                                                if ((ahorroTransactionsVarItem.transactionType == 'Depositado') && (_totalSavingsPreApproval > 0.0)) {
                                                                                   return Color(0xFF002CE9);
                                                                                 } else if (ahorroTransactionsVarItem.transactionType == 'Depositado') {
                                                                                   return Color(0xFF002CE9);

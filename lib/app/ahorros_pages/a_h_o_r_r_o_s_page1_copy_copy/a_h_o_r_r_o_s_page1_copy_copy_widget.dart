@@ -240,12 +240,14 @@ class _AHORROSPage1CopyCopyWidgetState extends State<AHORROSPage1CopyCopyWidget>
             body: Container(
               width: double.infinity,
               height: double.infinity,
-              child: Stack(
-                children: [
-                  Column(
-                    mainAxisSize: MainAxisSize.max,
-                    children: [
-                      StreamBuilder<List<CdatsRecord>>(
+              child: custom_widgets.FloatingNavBarScrollScope(
+                child: Stack(
+                  children: [
+                    custom_widgets.FloatingNavBarScrollListener(
+                      child: Column(
+                        mainAxisSize: MainAxisSize.max,
+                        children: [
+                          StreamBuilder<List<CdatsRecord>>(
                         stream: queryCdatsRecord(
                           queryBuilder: (cdatsRecord) => cdatsRecord.where(
                             'Idusuario',
@@ -336,9 +338,27 @@ class _AHORROSPage1CopyCopyWidgetState extends State<AHORROSPage1CopyCopyWidget>
                                     child: Column(
                                       mainAxisSize: MainAxisSize.min,
                                       children: [
-                                        Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
+                                        ClipRect(
+                                          child: BackdropFilter(
+                                            filter: ImageFilter.blur(
+                                              sigmaX: 15,
+                                              sigmaY: 15,
+                                            ),
+                                            child: Container(
+                                              width: double.infinity,
+                                              decoration: BoxDecoration(
+                                                color: Colors.white
+                                                    .withValues(alpha: 0.80),
+                                              ),
+                                              child: Column(
+                                                mainAxisSize: MainAxisSize.min,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.stretch,
+                                                children: [
+                                                  Padding(
+                                                padding:
+                                                    EdgeInsetsDirectional
+                                                        .fromSTEB(
                                                   0.0,
                                                   valueOrDefault<double>(
                                                     MediaQuery.sizeOf(context)
@@ -347,8 +367,9 @@ class _AHORROSPage1CopyCopyWidgetState extends State<AHORROSPage1CopyCopyWidget>
                                                     64.0,
                                                   ),
                                                   0.0,
-                                                  21.0),
-                                          child: Row(
+                                                  21.0,
+                                                ),
+                                                child: Row(
                                             mainAxisSize: MainAxisSize.max,
                                             mainAxisAlignment:
                                                 MainAxisAlignment.spaceBetween,
@@ -539,8 +560,8 @@ class _AHORROSPage1CopyCopyWidgetState extends State<AHORROSPage1CopyCopyWidget>
                                                   mainAxisSize:
                                                       MainAxisSize.max,
                                                   children: [
-                                                    Container(
-                                                      width: 100.0,
+                                                    Expanded(
+                                                      child: Container(
                                                       height: valueOrDefault<
                                                           double>(
                                                         MediaQuery.sizeOf(
@@ -583,7 +604,9 @@ class _AHORROSPage1CopyCopyWidgetState extends State<AHORROSPage1CopyCopyWidget>
                                                         ),
                                                       ),
                                                     ),
-                                                    InkWell(
+                                                    ),
+                                                    Expanded(
+                                                      child: InkWell(
                                                       splashColor:
                                                           Colors.transparent,
                                                       focusColor:
@@ -613,7 +636,6 @@ class _AHORROSPage1CopyCopyWidgetState extends State<AHORROSPage1CopyCopyWidget>
                                                         );
                                                       },
                                                       child: Container(
-                                                        width: 100.0,
                                                         height: valueOrDefault<
                                                             double>(
                                                           MediaQuery.sizeOf(
@@ -658,6 +680,7 @@ class _AHORROSPage1CopyCopyWidgetState extends State<AHORROSPage1CopyCopyWidget>
                                                           ),
                                                         ),
                                                       ),
+                                                    ),
                                                     ),
                                                   ],
                                                 ),
@@ -780,6 +803,11 @@ class _AHORROSPage1CopyCopyWidgetState extends State<AHORROSPage1CopyCopyWidget>
                                           ].divide(SizedBox(width: 8.0)),
                                         ),
                                         ),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                    ),
                                       ],
                                     ),
                                   ),
@@ -792,14 +820,14 @@ class _AHORROSPage1CopyCopyWidgetState extends State<AHORROSPage1CopyCopyWidget>
                       Flexible(
                         child: SingleChildScrollView(
                           child: Column(
-                            mainAxisSize: MainAxisSize.max,
-                            children: [
-                              Container(
-                                decoration: BoxDecoration(
-                                  color: FlutterFlowTheme.of(context)
-                                      .secondaryBackground,
-                                ),
-                                child: Padding(
+                                mainAxisSize: MainAxisSize.max,
+                                children: [
+                                  Container(
+                                    decoration: BoxDecoration(
+                                      color: FlutterFlowTheme.of(context)
+                                          .secondaryBackground,
+                                    ),
+                                    child: Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(
                                       0.0,
                                       valueOrDefault<double>(
@@ -1705,19 +1733,21 @@ class _AHORROSPage1CopyCopyWidgetState extends State<AHORROSPage1CopyCopyWidget>
                                       ),
                                       Padding(
                                         padding: EdgeInsetsDirectional.fromSTEB(
-                                            63.0,
+                                            20.0,
                                             valueOrDefault<double>(
                                               MediaQuery.sizeOf(context)
                                                       .height *
                                                   0.04266,
                                               36.0,
                                             ),
-                                            63.0,
+                                            20.0,
                                             0.0),
                                         child: Row(
-                                          mainAxisSize: MainAxisSize.max,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceEvenly,
                                           children: [
-                                            InkWell(
+                                            Expanded(
+                                              child: InkWell(
                                               splashColor: Colors.transparent,
                                               focusColor: Colors.transparent,
                                               hoverColor: Colors.transparent,
@@ -1823,7 +1853,9 @@ class _AHORROSPage1CopyCopyWidgetState extends State<AHORROSPage1CopyCopyWidget>
                                                 ].divide(SizedBox(height: 8.0)),
                                               ),
                                             ),
-                                            InkWell(
+                                            ),
+                                            Expanded(
+                                              child: InkWell(
                                               splashColor: Colors.transparent,
                                               focusColor: Colors.transparent,
                                               hoverColor: Colors.transparent,
@@ -1916,7 +1948,9 @@ class _AHORROSPage1CopyCopyWidgetState extends State<AHORROSPage1CopyCopyWidget>
                                                 ].divide(SizedBox(height: 8.0)),
                                               ),
                                             ),
-                                            InkWell(
+                                            ),
+                                            Expanded(
+                                              child: InkWell(
                                               splashColor: Colors.transparent,
                                               focusColor: Colors.transparent,
                                               hoverColor: Colors.transparent,
@@ -1992,7 +2026,8 @@ class _AHORROSPage1CopyCopyWidgetState extends State<AHORROSPage1CopyCopyWidget>
                                               ),
                                             ).animateOnPageLoad(animationsMap[
                                                 'columnOnPageLoadAnimation']!),
-                                          ].divide(SizedBox(width: 44.0)),
+                                            ),
+                                          ],
                                         ),
                                       ),
                                       Column(
@@ -2009,7 +2044,7 @@ class _AHORROSPage1CopyCopyWidgetState extends State<AHORROSPage1CopyCopyWidget>
                                                       24.0,
                                                     ),
                                                     0.0,
-                                                    120.0),
+                                                    80.0),
                                             child: Column(
                                               mainAxisSize: MainAxisSize.max,
                                               crossAxisAlignment:
@@ -2851,12 +2886,18 @@ class _AHORROSPage1CopyCopyWidgetState extends State<AHORROSPage1CopyCopyWidget>
                                   ),
                                 ),
                               ),
+                              SizedBox(
+                                height: custom_widgets
+                                        .floatingNavBarClearance(context) +
+                                    28.0,
+                              ),
                             ],
                           ),
                         ),
                       ),
                     ],
-                  ),
+                      ),
+                    ),
                   Container(
                     width: valueOrDefault<double>(
                       MediaQuery.sizeOf(context).width * 1.00,
@@ -2945,7 +2986,8 @@ class _AHORROSPage1CopyCopyWidgetState extends State<AHORROSPage1CopyCopyWidget>
                       },
                     ),
                   ),
-                ],
+                  ],
+                ),
               ),
             ),
           ),

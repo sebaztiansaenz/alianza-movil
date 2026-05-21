@@ -183,7 +183,8 @@ class _DetallesTransaccionCopyWidgetState
                               ),
                               Text(
                                 valueOrDefault<String>(
-                                  functions.formatAmount(widget!.monto!),
+                                  functions.formatAmount(
+                                      valueOrDefault<double>(widget!.monto, 0.0)),
                                   '0',
                                 ),
                                 textAlign: TextAlign.center,
@@ -252,7 +253,8 @@ class _DetallesTransaccionCopyWidgetState
                             ),
                             AutoSizeText(
                               valueOrDefault<String>(
-                                functions.formatAmount(widget!.monto!),
+                                functions.formatAmount(
+                                    valueOrDefault<double>(widget!.monto, 0.0)),
                                 '0',
                               ),
                               textAlign: TextAlign.center,
@@ -320,7 +322,8 @@ class _DetallesTransaccionCopyWidgetState
                             ),
                             Text(
                               valueOrDefault<String>(
-                                functions.formatAmount(widget!.monto!),
+                                functions.formatAmount(
+                                    valueOrDefault<double>(widget!.monto, 0.0)),
                                 '0',
                               ),
                               textAlign: TextAlign.center,
@@ -455,7 +458,7 @@ class _DetallesTransaccionCopyWidgetState
                                   children: [
                                     Flexible(
                                       child: Column(
-                                        mainAxisSize: MainAxisSize.max,
+                                        mainAxisSize: MainAxisSize.min,
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
                                         children: [
@@ -536,40 +539,34 @@ class _DetallesTransaccionCopyWidgetState
                                   children: [
                                     Flexible(
                                       child: Column(
-                                        mainAxisSize: MainAxisSize.max,
+                                        mainAxisSize: MainAxisSize.min,
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
                                         children: [
-                                          Expanded(
-                                            child: AuthUserStreamWidget(
-                                              builder: (context) =>
-                                                  AutoSizeText(
-                                                valueOrDefault<String>(
-                                                  currentUserDisplayName,
-                                                  'Nombre',
-                                                ),
-                                                textAlign: TextAlign.start,
-                                                maxLines: 2,
-                                                minFontSize: 12.0,
-                                                style:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyMedium
-                                                        .override(
-                                                          fontFamily: 'Satoshi',
-                                                          fontSize:
-                                                              valueOrDefault<
-                                                                  double>(
-                                                            MediaQuery.sizeOf(
-                                                                        context)
-                                                                    .height *
-                                                                0.01896,
-                                                            16.0,
-                                                          ),
-                                                          letterSpacing: 0.0,
-                                                          fontWeight:
-                                                              FontWeight.w500,
-                                                        ),
+                                          AuthUserStreamWidget(
+                                            builder: (context) => AutoSizeText(
+                                              valueOrDefault<String>(
+                                                widget!.apellidosynombres,
+                                                currentUserDisplayName,
                                               ),
+                                              textAlign: TextAlign.start,
+                                              maxLines: 2,
+                                              minFontSize: 12.0,
+                                              style: FlutterFlowTheme.of(
+                                                      context)
+                                                  .bodyMedium
+                                                  .override(
+                                                    fontFamily: 'Satoshi',
+                                                    fontSize:
+                                                        valueOrDefault<double>(
+                                                      MediaQuery.sizeOf(context)
+                                                              .height *
+                                                          0.01896,
+                                                      16.0,
+                                                    ),
+                                                    letterSpacing: 0.0,
+                                                    fontWeight: FontWeight.w500,
+                                                  ),
                                             ),
                                           ),
                                           AutoSizeText(
@@ -597,9 +594,9 @@ class _DetallesTransaccionCopyWidgetState
                               ].divide(SizedBox(height: 18.0)),
                             ),
                           ),
-                          Expanded(
+                          Flexible(
                             child: Column(
-                              mainAxisSize: MainAxisSize.max,
+                              mainAxisSize: MainAxisSize.min,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Row(
@@ -607,24 +604,26 @@ class _DetallesTransaccionCopyWidgetState
                                   children: [
                                     Flexible(
                                       child: Column(
-                                        mainAxisSize: MainAxisSize.max,
+                                        mainAxisSize: MainAxisSize.min,
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
                                         children: [
                                           AutoSizeText(
-                                            '${dateTimeFormat(
-                                              "d/M/y",
-                                              widget!.fecha,
-                                              locale:
-                                                  FFLocalizations.of(context)
-                                                      .languageCode,
-                                            )} - ${dateTimeFormat(
-                                              "jms",
-                                              widget!.fecha,
-                                              locale:
-                                                  FFLocalizations.of(context)
-                                                      .languageCode,
-                                            )}',
+                                            widget!.fecha != null
+                                                ? '${dateTimeFormat(
+                                                    "d/M/y",
+                                                    widget!.fecha,
+                                                    locale: FFLocalizations.of(
+                                                            context)
+                                                        .languageCode,
+                                                  )} - ${dateTimeFormat(
+                                                    "jms",
+                                                    widget!.fecha,
+                                                    locale: FFLocalizations.of(
+                                                            context)
+                                                        .languageCode,
+                                                  )}'
+                                                : '--',
                                             style: FlutterFlowTheme.of(context)
                                                 .bodyMedium
                                                 .override(
@@ -675,7 +674,6 @@ class _DetallesTransaccionCopyWidgetState
                 padding: EdgeInsetsDirectional.fromSTEB(20.0, 37.0, 20.0, 0.0),
                 child: Container(
                   width: MediaQuery.sizeOf(context).width * 1.0,
-                  height: 74.0,
                   decoration: BoxDecoration(
                     color: FlutterFlowTheme.of(context).secondaryBackground,
                     boxShadow: [
@@ -696,7 +694,7 @@ class _DetallesTransaccionCopyWidgetState
                   child: Padding(
                     padding: EdgeInsets.all(14.0),
                     child: Column(
-                      mainAxisSize: MainAxisSize.max,
+                      mainAxisSize: MainAxisSize.min,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         AutoSizeText(

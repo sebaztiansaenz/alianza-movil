@@ -936,21 +936,25 @@ class _AHORROScdat2CopyCopyCopyWidgetState
                                   children: [
                                     Row(
                                       mainAxisSize: MainAxisSize.max,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       children: [
-                                        Text(
-                                          'Disponibilidad de retiros aticipados',
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyMedium
-                                              .override(
-                                                fontFamily: 'Satoshi',
-                                                letterSpacing: 0.0,
-                                                fontWeight: FontWeight.bold,
-                                              ),
+                                        Expanded(
+                                          child: Text(
+                                            'Disponibilidad de retiros aticipados',
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyMedium
+                                                .override(
+                                                  fontFamily: 'Satoshi',
+                                                  letterSpacing: 0.0,
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                          ),
                                         ),
+                                        const SizedBox(width: 8.0),
                                         if (widget!.tiempo == '6')
-                                          Text(
+                                          Flexible(
+                                            child: Text(
                                             valueOrDefault<String>(
                                               functions.formatAmount(
                                                   valueOrDefault<double>(
@@ -980,9 +984,14 @@ class _AHORROScdat2CopyCopyCopyWidgetState
                                                   letterSpacing: 0.0,
                                                   fontWeight: FontWeight.bold,
                                                 ),
+                                            textAlign: TextAlign.end,
+                                            maxLines: 1,
+                                            overflow: TextOverflow.ellipsis,
                                           ),
+                                        ),
                                         if (widget!.tiempo != '6')
-                                          Text(
+                                          Flexible(
+                                            child: Text(
                                             valueOrDefault<String>(
                                               functions.formatAmount(
                                                   valueOrDefault<double>(
@@ -1012,7 +1021,11 @@ class _AHORROScdat2CopyCopyCopyWidgetState
                                                   letterSpacing: 0.0,
                                                   fontWeight: FontWeight.bold,
                                                 ),
+                                            textAlign: TextAlign.end,
+                                            maxLines: 1,
+                                            overflow: TextOverflow.ellipsis,
                                           ),
+                                        ),
                                       ],
                                     ),
                                     Padding(
@@ -1197,7 +1210,11 @@ class _AHORROScdat2CopyCopyCopyWidgetState
                           ),
                           Padding(
                             padding: EdgeInsetsDirectional.fromSTEB(
-                                20.0, 16.0, 20.0, 50.0),
+                              20.0,
+                              16.0,
+                              20.0,
+                              MediaQuery.paddingOf(context).bottom + 40.0,
+                            ),
                             child: FFButtonWidget(
                               onPressed: () async {
                                 context.pushNamed(

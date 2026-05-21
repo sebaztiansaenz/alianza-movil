@@ -81,9 +81,11 @@ class _AyudaWidgetState extends State<AyudaWidget> {
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
-        body: Stack(
+        body: custom_widgets.FloatingNavBarScrollScope(
+          child: Stack(
           children: [
-            Column(
+            custom_widgets.FloatingNavBarScrollListener(
+              child: Column(
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
@@ -607,6 +609,7 @@ class _AyudaWidgetState extends State<AyudaWidget> {
                 ),
               ],
             ),
+            ),
             Container(
               width: valueOrDefault<double>(
                 MediaQuery.sizeOf(context).width * 1.00,
@@ -664,6 +667,7 @@ class _AyudaWidgetState extends State<AyudaWidget> {
               ),
             ),
           ],
+          ),
         ),
       ),
     );

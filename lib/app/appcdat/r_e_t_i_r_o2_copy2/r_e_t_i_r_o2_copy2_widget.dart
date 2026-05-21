@@ -225,6 +225,9 @@ class _RETIRO2Copy2WidgetState extends State<RETIRO2Copy2Widget>
                       ),
                       Flexible(
                         child: SingleChildScrollView(
+                          padding: EdgeInsets.only(
+                            bottom: MediaQuery.paddingOf(context).bottom + 32.0,
+                          ),
                           child: Column(
                             mainAxisSize: MainAxisSize.max,
                             children: [
@@ -371,7 +374,9 @@ class _RETIRO2Copy2WidgetState extends State<RETIRO2Copy2Widget>
                                                           },
                                                           child: Container(
                                                             width: 295.0,
-                                                            height: 98.0,
+                                                            height: 112.0,
+                                                            clipBehavior:
+                                                                Clip.antiAlias,
                                                             decoration:
                                                                 BoxDecoration(
                                                               color: FlutterFlowTheme
@@ -418,192 +423,186 @@ class _RETIRO2Copy2WidgetState extends State<RETIRO2Copy2Widget>
                                                                       .end,
                                                               children: [
                                                                 Stack(
+                                                                  clipBehavior:
+                                                                      Clip.none,
                                                                   children: [
-                                                                    Row(
-                                                                      mainAxisSize:
-                                                                          MainAxisSize
-                                                                              .max,
-                                                                      mainAxisAlignment:
-                                                                          MainAxisAlignment
-                                                                              .start,
-                                                                      crossAxisAlignment:
-                                                                          CrossAxisAlignment
-                                                                              .start,
-                                                                      children: [
-                                                                        Expanded(
-                                                                          child:
-                                                                              Row(
-                                                                            mainAxisSize:
-                                                                                MainAxisSize.max,
-                                                                            children:
-                                                                                [
-                                                                              Row(
-                                                                                mainAxisSize: MainAxisSize.max,
-                                                                                children: [
-                                                                                  if (_model.idcuenta != ahorro1Item.reference.id)
-                                                                                    Padding(
-                                                                                      padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 0.0),
-                                                                                      child: InkWell(
-                                                                                        splashColor: Colors.transparent,
-                                                                                        focusColor: Colors.transparent,
-                                                                                        hoverColor: Colors.transparent,
-                                                                                        highlightColor: Colors.transparent,
-                                                                                        onTap: () async {
-                                                                                          _model.idcuenta = ahorro1Item.reference.id;
-                                                                                          _model.monto = valueOrDefault<double>(
-                                                                                            valueOrDefault<double>(
+                                                                    Padding(
+                                                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                                                          12.0,
+                                                                          0.0,
+                                                                          12.0,
+                                                                          0.0),
+                                                                      child: Row(
+                                                                        crossAxisAlignment:
+                                                                            CrossAxisAlignment
+                                                                                .start,
+                                                                        children: [
+                                                                          Padding(
+                                                                            padding: EdgeInsetsDirectional.fromSTEB(
+                                                                                0.0,
+                                                                                16.0,
+                                                                                0.0,
+                                                                                0.0),
+                                                                            child:
+                                                                                Row(
+                                                                              mainAxisSize:
+                                                                                  MainAxisSize.min,
+                                                                              children: [
+                                                                                if (_model.idcuenta != ahorro1Item.reference.id)
+                                                                                  InkWell(
+                                                                                    splashColor: Colors.transparent,
+                                                                                    focusColor: Colors.transparent,
+                                                                                    hoverColor: Colors.transparent,
+                                                                                    highlightColor: Colors.transparent,
+                                                                                    onTap: () async {
+                                                                                      _model.idcuenta = ahorro1Item.reference.id;
+                                                                                      _model.monto = valueOrDefault<double>(
+                                                                                        valueOrDefault<double>(
+                                                                                              valueOrDefault<double>(
+                                                                                                    _model.totalesAhorro.where((e) => e.ahorroid == ahorro1Item.reference.id).toList().firstOrNull?.total,
+                                                                                                    0.0,
+                                                                                                  ) -
                                                                                                   valueOrDefault<double>(
-                                                                                                        _model.totalesAhorro.where((e) => e.ahorroid == ahorro1Item.reference.id).toList().firstOrNull?.total,
-                                                                                                        0.0,
-                                                                                                      ) -
-                                                                                                      valueOrDefault<double>(
-                                                                                                        _model.retirosAhorro.where((e) => e.ahorroid == ahorro1Item.reference.id).toList().firstOrNull?.total,
-                                                                                                        0.0,
-                                                                                                      ),
-                                                                                                  0.0,
-                                                                                                ) +
-                                                                                                valueOrDefault<double>(
-                                                                                                  functions.sumaTotal(ahorro1Item.transactions.map((e) => e.taxedBenefit).toList()),
-                                                                                                  0.0,
-                                                                                                ),
-                                                                                            0.0,
-                                                                                          );
-                                                                                          _model.list = valueOrDefault<int>(
-                                                                                            ahorro1Index + 01,
-                                                                                            0,
-                                                                                          );
-                                                                                          safeSetState(() {});
-                                                                                        },
-                                                                                        child: Container(
-                                                                                          width: 16.0,
-                                                                                          height: 16.0,
-                                                                                          decoration: BoxDecoration(
-                                                                                            color: FlutterFlowTheme.of(context).secondaryBackground,
-                                                                                            borderRadius: BorderRadius.circular(24.0),
-                                                                                            border: Border.all(
-                                                                                              color: Color(0xB2262632),
+                                                                                                    _model.retirosAhorro.where((e) => e.ahorroid == ahorro1Item.reference.id).toList().firstOrNull?.total,
+                                                                                                    0.0,
+                                                                                                  ),
+                                                                                              0.0,
+                                                                                            ) +
+                                                                                            valueOrDefault<double>(
+                                                                                              functions.sumaTotal(ahorro1Item.transactions.map((e) => e.taxedBenefit).toList()),
+                                                                                              0.0,
                                                                                             ),
+                                                                                        0.0,
+                                                                                      );
+                                                                                      _model.list = valueOrDefault<int>(
+                                                                                        ahorro1Index + 01,
+                                                                                        0,
+                                                                                      );
+                                                                                      safeSetState(() {});
+                                                                                    },
+                                                                                    child: Container(
+                                                                                      width: 16.0,
+                                                                                      height: 16.0,
+                                                                                      decoration: BoxDecoration(
+                                                                                        color: FlutterFlowTheme.of(context).secondaryBackground,
+                                                                                        borderRadius: BorderRadius.circular(24.0),
+                                                                                        border: Border.all(
+                                                                                          color: Color(0xB2262632),
+                                                                                        ),
+                                                                                      ),
+                                                                                    ),
+                                                                                  ),
+                                                                                if (_model.idcuenta == ahorro1Item.reference.id)
+                                                                                  InkWell(
+                                                                                    splashColor: Colors.transparent,
+                                                                                    focusColor: Colors.transparent,
+                                                                                    hoverColor: Colors.transparent,
+                                                                                    highlightColor: Colors.transparent,
+                                                                                    onTap: () async {
+                                                                                      _model.idcuenta = ahorro1Item.reference.id;
+                                                                                      safeSetState(() {});
+                                                                                    },
+                                                                                    child: Container(
+                                                                                      width: 16.0,
+                                                                                      height: 16.0,
+                                                                                      decoration: BoxDecoration(
+                                                                                        color: FlutterFlowTheme.of(context).secondaryBackground,
+                                                                                        borderRadius: BorderRadius.circular(24.0),
+                                                                                        border: Border.all(
+                                                                                          color: Color(0xB0FF6700),
+                                                                                          width: 1.0,
+                                                                                        ),
+                                                                                      ),
+                                                                                      child: Padding(
+                                                                                        padding: EdgeInsets.all(2.0),
+                                                                                        child: Container(
+                                                                                          width: 10.0,
+                                                                                          height: 10.0,
+                                                                                          decoration: BoxDecoration(
+                                                                                            color: FlutterFlowTheme.of(context).customColor4,
+                                                                                            borderRadius: BorderRadius.circular(24.0),
                                                                                           ),
                                                                                         ),
                                                                                       ),
                                                                                     ),
-                                                                                  if (_model.idcuenta == ahorro1Item.reference.id)
-                                                                                    Padding(
-                                                                                      padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 0.0),
-                                                                                      child: InkWell(
-                                                                                        splashColor: Colors.transparent,
-                                                                                        focusColor: Colors.transparent,
-                                                                                        hoverColor: Colors.transparent,
-                                                                                        highlightColor: Colors.transparent,
-                                                                                        onTap: () async {
-                                                                                          _model.idcuenta = ahorro1Item.reference.id;
-                                                                                          safeSetState(() {});
-                                                                                        },
-                                                                                        child: Container(
-                                                                                          width: 16.0,
-                                                                                          height: 16.0,
-                                                                                          decoration: BoxDecoration(
-                                                                                            color: FlutterFlowTheme.of(context).secondaryBackground,
-                                                                                            borderRadius: BorderRadius.circular(24.0),
-                                                                                            border: Border.all(
-                                                                                              color: Color(0xB0FF6700),
-                                                                                              width: 1.0,
-                                                                                            ),
+                                                                                  ),
+                                                                              ],
+                                                                            ),
+                                                                          ),
+                                                                          SizedBox(
+                                                                              width: 8.0),
+                                                                          Expanded(
+                                                                            child:
+                                                                                Padding(
+                                                                              padding: EdgeInsetsDirectional.fromSTEB(
+                                                                                  0.0,
+                                                                                  16.0,
+                                                                                  52.0,
+                                                                                  0.0),
+                                                                              child: Column(
+                                                                                mainAxisSize: MainAxisSize.min,
+                                                                                crossAxisAlignment: CrossAxisAlignment.start,
+                                                                                children: [
+                                                                                  Row(
+                                                                                    children: [
+                                                                                      Image.asset(
+                                                                                        'assets/images/Group_3.png',
+                                                                                        width: 14.0,
+                                                                                        height: 20.0,
+                                                                                        fit: BoxFit.cover,
+                                                                                      ),
+                                                                                      SizedBox(width: 8.0),
+                                                                                      Expanded(
+                                                                                        child: Text(
+                                                                                          valueOrDefault<String>(
+                                                                                            ahorro1Item.savingsType,
+                                                                                            '- - -',
                                                                                           ),
-                                                                                          child: Padding(
-                                                                                            padding: EdgeInsets.all(2.0),
-                                                                                            child: Container(
-                                                                                              width: 100.0,
-                                                                                              height: 100.0,
-                                                                                              decoration: BoxDecoration(
-                                                                                                color: FlutterFlowTheme.of(context).customColor4,
-                                                                                                borderRadius: BorderRadius.circular(24.0),
-                                                                                                shape: BoxShape.rectangle,
+                                                                                          maxLines: 2,
+                                                                                          overflow: TextOverflow.ellipsis,
+                                                                                          style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                                fontFamily: 'Satoshi',
+                                                                                                color: Color(0xFF002CE9),
+                                                                                                letterSpacing: 0.0,
+                                                                                                fontWeight: FontWeight.bold,
                                                                                               ),
-                                                                                            ),
-                                                                                          ),
                                                                                         ),
                                                                                       ),
+                                                                                    ],
+                                                                                  ),
+                                                                                  AuthUserStreamWidget(
+                                                                                    builder: (context) => Text(
+                                                                                      valueOrDefault<String>(
+                                                                                        '# ${valueOrDefault(currentUserDocument?.nit, '')}-0${valueOrDefault<String>(
+                                                                                          (ahorro1Index + 01).toString(),
+                                                                                          '0',
+                                                                                        )}',
+                                                                                        '0',
+                                                                                      ),
+                                                                                      style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                            fontFamily: 'Satoshi',
+                                                                                            color: Color(0xB3262632),
+                                                                                            fontSize: 12.0,
+                                                                                            letterSpacing: 0.0,
+                                                                                          ),
                                                                                     ),
+                                                                                  ),
                                                                                 ],
                                                                               ),
-                                                                              Padding(
-                                                                                padding: EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 0.0),
-                                                                                child: Row(
-                                                                                  mainAxisSize: MainAxisSize.max,
-                                                                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                                                                  children: [
-                                                                                    Column(
-                                                                                      mainAxisSize: MainAxisSize.max,
-                                                                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                                                                      children: [
-                                                                                        Row(
-                                                                                          mainAxisSize: MainAxisSize.max,
-                                                                                          children: [
-                                                                                            Padding(
-                                                                                              padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 8.0, 0.0),
-                                                                                              child: Image.asset(
-                                                                                                'assets/images/Group_3.png',
-                                                                                                width: 14.0,
-                                                                                                height: 20.0,
-                                                                                                fit: BoxFit.cover,
-                                                                                              ),
-                                                                                            ),
-                                                                                            Text(
-                                                                                              valueOrDefault<String>(
-                                                                                                ahorro1Item.savingsType,
-                                                                                                '- - -',
-                                                                                              ),
-                                                                                              style: FlutterFlowTheme.of(context).bodyMedium.override(
-                                                                                                    fontFamily: 'Satoshi',
-                                                                                                    color: Color(0xFF002CE9),
-                                                                                                    letterSpacing: 0.0,
-                                                                                                    fontWeight: FontWeight.bold,
-                                                                                                  ),
-                                                                                            ),
-                                                                                          ],
-                                                                                        ),
-                                                                                        AuthUserStreamWidget(
-                                                                                          builder: (context) => Text(
-                                                                                            valueOrDefault<String>(
-                                                                                              '# ${valueOrDefault(currentUserDocument?.nit, '')}-0${valueOrDefault<String>(
-                                                                                                (ahorro1Index + 01).toString(),
-                                                                                                '0',
-                                                                                              )}',
-                                                                                              '0',
-                                                                                            ),
-                                                                                            style: FlutterFlowTheme.of(context).bodyMedium.override(
-                                                                                                  fontFamily: 'Satoshi',
-                                                                                                  color: Color(0xB3262632),
-                                                                                                  fontSize: 12.0,
-                                                                                                  letterSpacing: 0.0,
-                                                                                                ),
-                                                                                          ),
-                                                                                        ),
-                                                                                      ],
-                                                                                    ),
-                                                                                  ],
-                                                                                ),
-                                                                              ),
-                                                                            ].divide(SizedBox(width: 12.0)),
+                                                                            ),
                                                                           ),
-                                                                        ),
-                                                                        Align(
-                                                                          alignment: AlignmentDirectional(
-                                                                              1.0,
-                                                                              -1.0),
-                                                                          child:
-                                                                              Image.asset(
-                                                                            'assets/images/Frame_2085662540_(5).png',
-                                                                            width:
-                                                                                54.0,
-                                                                            height:
-                                                                                22.0,
-                                                                            fit:
-                                                                                BoxFit.fill,
-                                                                          ),
-                                                                        ),
-                                                                      ],
+                                                                        ],
+                                                                      ),
+                                                                    ),
+                                                                    Positioned(
+                                                                      top: 12.0,
+                                                                      right: 12.0,
+                                                                      child: Image.asset(
+                                                                        'assets/images/Frame_2085662540_(5).png',
+                                                                        width: 48.0,
+                                                                        height: 20.0,
+                                                                        fit: BoxFit.contain,
+                                                                      ),
                                                                     ),
                                                                   ],
                                                                 ),
@@ -624,45 +623,50 @@ class _RETIRO2Copy2WidgetState extends State<RETIRO2Copy2Widget>
                                                                             ?.firstOrNull
                                                                             ?.total !=
                                                                         null)
-                                                                      Padding(
-                                                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                                                            0.0,
-                                                                            0.0,
-                                                                            14.0,
-                                                                            0.0),
-                                                                        child:
-                                                                            Text(
-                                                                          valueOrDefault<
-                                                                              String>(
-                                                                            functions.formatAmount(valueOrDefault<double>(
-                                                                              valueOrDefault<double>(
+                                                                      Expanded(
+                                                                        child: Padding(
+                                                                          padding: EdgeInsetsDirectional.fromSTEB(
+                                                                              0.0,
+                                                                              0.0,
+                                                                              14.0,
+                                                                              0.0),
+                                                                          child: Align(
+                                                                            alignment: AlignmentDirectional.centerEnd,
+                                                                            child: FittedBox(
+                                                                              fit: BoxFit.scaleDown,
+                                                                              alignment: Alignment.centerRight,
+                                                                              child: Text(
+                                                                                valueOrDefault<String>(
+                                                                                  functions.formatAmount(valueOrDefault<double>(
                                                                                     valueOrDefault<double>(
-                                                                                          _model.totalesAhorro.where((e) => e.ahorroid == ahorro1Item.reference.id).toList().firstOrNull?.total,
+                                                                                          valueOrDefault<double>(
+                                                                                                _model.totalesAhorro.where((e) => e.ahorroid == ahorro1Item.reference.id).toList().firstOrNull?.total,
+                                                                                                0.0,
+                                                                                              ) -
+                                                                                              valueOrDefault<double>(
+                                                                                                _model.retirosAhorro.where((e) => e.ahorroid == ahorro1Item.reference.id).toList().firstOrNull?.total,
+                                                                                                0.0,
+                                                                                              ),
                                                                                           0.0,
-                                                                                        ) -
+                                                                                        ) +
                                                                                         valueOrDefault<double>(
-                                                                                          _model.retirosAhorro.where((e) => e.ahorroid == ahorro1Item.reference.id).toList().firstOrNull?.total,
+                                                                                          functions.sumaTotal(ahorro1Item.transactions.map((e) => e.taxedBenefit).toList()),
                                                                                           0.0,
                                                                                         ),
                                                                                     0.0,
-                                                                                  ) +
-                                                                                  valueOrDefault<double>(
-                                                                                    functions.sumaTotal(ahorro1Item.transactions.map((e) => e.taxedBenefit).toList()),
-                                                                                    0.0,
-                                                                                  ),
-                                                                              0.0,
-                                                                            )),
-                                                                            '\$0',
-                                                                          ),
-                                                                          style: FlutterFlowTheme.of(context)
-                                                                              .bodyMedium
-                                                                              .override(
-                                                                                fontFamily: 'Satoshi',
-                                                                                color: Color(0xFF002CE9),
-                                                                                fontSize: 24.0,
-                                                                                letterSpacing: 0.0,
-                                                                                fontWeight: FontWeight.w900,
+                                                                                  )),
+                                                                                  '\$0',
+                                                                                ),
+                                                                                style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                      fontFamily: 'Satoshi',
+                                                                                      color: Color(0xFF002CE9),
+                                                                                      fontSize: 24.0,
+                                                                                      letterSpacing: 0.0,
+                                                                                      fontWeight: FontWeight.w900,
+                                                                                    ),
                                                                               ),
+                                                                            ),
+                                                                          ),
                                                                         ),
                                                                       ),
                                                                     if (_model
@@ -784,7 +788,7 @@ class _RETIRO2Copy2WidgetState extends State<RETIRO2Copy2Widget>
                                                           EdgeInsetsDirectional
                                                               .fromSTEB(
                                                                   0.0,
-                                                                  16.0,
+                                                                  20.0,
                                                                   0.0,
                                                                   0.0),
                                                       child: Builder(
@@ -805,7 +809,23 @@ class _RETIRO2Copy2WidgetState extends State<RETIRO2Copy2Widget>
                                                               final cdatItem =
                                                                   cdat[
                                                                       cdatIndex];
-                                                              return Opacity(
+                                                              return Expanded(
+                                                                child: Padding(
+                                                                  padding:
+                                                                      EdgeInsetsDirectional
+                                                                          .fromSTEB(
+                                                                    cdatIndex > 0
+                                                                        ? 8.0
+                                                                        : 0.0,
+                                                                    0.0,
+                                                                    cdatIndex <
+                                                                            cdat.length -
+                                                                                1
+                                                                        ? 8.0
+                                                                        : 0.0,
+                                                                    0.0,
+                                                                  ),
+                                                                  child: Opacity(
                                                                 opacity:
                                                                     valueOrDefault<
                                                                         double>(
@@ -847,8 +867,8 @@ class _RETIRO2Copy2WidgetState extends State<RETIRO2Copy2Widget>
                                                                   },
                                                                   child:
                                                                       Container(
-                                                                    width:
-                                                                        169.0,
+                                                                    width: double
+                                                                        .infinity,
                                                                     height:
                                                                         66.0,
                                                                     decoration:
@@ -980,10 +1000,10 @@ class _RETIRO2Copy2WidgetState extends State<RETIRO2Copy2Widget>
                                                                     ),
                                                                   ),
                                                                 ),
+                                                              ),
+                                                                ),
                                                               );
-                                                            }).divide(SizedBox(
-                                                                    width:
-                                                                        12.0)),
+                                                            }),
                                                           );
                                                         },
                                                       ),
@@ -997,7 +1017,7 @@ class _RETIRO2Copy2WidgetState extends State<RETIRO2Copy2Widget>
                                                               EdgeInsetsDirectional
                                                                   .fromSTEB(
                                                                       0.0,
-                                                                      32.0,
+                                                                      40.0,
                                                                       0.0,
                                                                       0.0),
                                                           child: Column(

@@ -23,6 +23,8 @@ class DraggableFloatingButton extends StatefulWidget {
     this.onPressed,
     this.backgroundColor,
     this.iconColor,
+    this.showLabel = true,
+    this.labelText = 'Ayuda',
   }) : super(key: key);
 
   final double? width;
@@ -30,6 +32,9 @@ class DraggableFloatingButton extends StatefulWidget {
   final Future<dynamic> Function()? onPressed;
   final Color? backgroundColor;
   final Color? iconColor;
+  /// When true, shows [labelText] in small text below the headset icon.
+  final bool showLabel;
+  final String labelText;
 
   @override
   State<DraggableFloatingButton> createState() =>
@@ -37,22 +42,129 @@ class DraggableFloatingButton extends StatefulWidget {
 }
 
 class _DraggableFloatingButtonState extends State<DraggableFloatingButton> {
+  final GlobalKey _dragAreaKey = GlobalKey();
+
   double? xPosition;
   double? yPosition;
+
+  static const double _circleSize = 60.0;
+  /// Compact vertical chip: icon + small label.
+  static const double _labeledWidth = 52.0;
+  static const double _labeledHeight = 58.0;
+  static const double _labeledRadius = 16.0;
+
+  bool get _useLabeledStack =>
+      widget.showLabel && widget.labelText.isNotEmpty;
+
+  double get _buttonWidth =>
+      _useLabeledStack ? _labeledWidth : _circleSize;
+
+  double get _buttonHeight =>
+      _useLabeledStack ? _labeledHeight : _circleSize;
+
+  BoxDecoration _decoration({required bool circle}) {
+    final color = widget.backgroundColor ?? const Color(0xFF002CE9);
+    if (circle) {
+      return BoxDecoration(
+        color: color,
+        shape: BoxShape.circle,
+        boxShadow: const [
+          BoxShadow(
+            color: Color(0x33000000),
+            blurRadius: 12,
+            offset: Offset(0, 4),
+          ),
+          BoxShadow(
+            color: Color(0x40002CE9),
+            blurRadius: 8,
+            offset: Offset(0, 2),
+            spreadRadius: -2,
+          ),
+        ],
+      );
+    }
+    return BoxDecoration(
+      color: color,
+      borderRadius: BorderRadius.circular(_labeledRadius),
+      border: Border.all(
+        color: const Color(0x45FFFFFF),
+        width: 1,
+      ),
+      boxShadow: const [
+        BoxShadow(
+          color: Color(0x38000000),
+          blurRadius: 14,
+          offset: Offset(0, 5),
+        ),
+        BoxShadow(
+          color: Color(0x55002CE9),
+          blurRadius: 10,
+          offset: Offset(0, 2),
+          spreadRadius: -4,
+        ),
+      ],
+    );
+  }
+
+  Widget _buildFace() {
+    final iconColor = widget.iconColor ?? Colors.white;
+    final icon = Icon(
+      Icons.headset_mic_rounded,
+      color: iconColor,
+      size: _useLabeledStack ? 21 : 28,
+    );
+    if (!_useLabeledStack) {
+      return Center(child: icon);
+    }
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(4, 7, 4, 6),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          icon,
+          const SizedBox(height: 4),
+          Text(
+            widget.labelText,
+            textAlign: TextAlign.center,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+            style: const TextStyle(
+              fontFamily: 'Satoshi',
+              color: Colors.white,
+              fontSize: 10,
+              height: 1.05,
+              fontWeight: FontWeight.w700,
+              letterSpacing: 0.2,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildButtonShell() {
+    final decoration = _decoration(circle: !_useLabeledStack);
+    return Container(
+      width: _buttonWidth,
+      height: _buttonHeight,
+      alignment: Alignment.center,
+      decoration: decoration,
+      child: _buildFace(),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     final width = widget.width ?? MediaQuery.of(context).size.width;
     final height = widget.height ?? MediaQuery.of(context).size.height;
 
-    // Inicializar en esquina inferior derecha
-    xPosition ??= width * 0.83; // 83% del ancho (derecha)
-    yPosition ??= height * 0.82; // 82% de la altura (abajo)
-
-    print('🟢 Widget: ${width}x$height');
-    print('📍 Posición: x=$xPosition, y=$yPosition');
+    // Posición inicial como antes (esquina inferior derecha aprox.).
+    xPosition ??= (width * 0.83).clamp(0.0, width - _buttonWidth);
+    yPosition ??= (height * 0.82).clamp(0.0, height - _buttonHeight);
 
     return SizedBox(
+      key: _dragAreaKey,
       width: width,
       height: height,
       child: Stack(
@@ -61,66 +173,36 @@ class _DraggableFloatingButtonState extends State<DraggableFloatingButton> {
             left: xPosition,
             top: yPosition,
             child: Draggable(
-              feedback: Container(
-                width: 60,
-                height: 60,
-                decoration: BoxDecoration(
-                  color: widget.backgroundColor ?? Color(0xFF002CE9),
-                  shape: BoxShape.circle,
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black26,
-                      blurRadius: 10,
-                      offset: Offset(0, 4),
-                    ),
-                  ],
+              feedback: Material(
+                color: Colors.transparent,
+                elevation: 6,
+                borderRadius: BorderRadius.circular(
+                  _useLabeledStack ? _labeledRadius : 30,
                 ),
-                child: Icon(
-                  Icons.headset_mic,
-                  color: widget.iconColor ?? Colors.white,
-                  size: 28,
-                ),
+                child: _buildButtonShell(),
               ),
-              childWhenDragging: Container(),
-              onDragEnd: (details) {
+              childWhenDragging: SizedBox(
+                width: _buttonWidth,
+                height: _buttonHeight,
+              ),
+              onDragEnd: (DraggableDetails details) {
+                final box = _dragAreaKey.currentContext?.findRenderObject()
+                    as RenderBox?;
+                if (box == null || !box.hasSize || !box.attached) {
+                  return;
+                }
+                // details.offset es global; Positioned usa coordenadas del Stack.
+                final local = box.globalToLocal(details.offset);
                 setState(() {
-                  xPosition = details.offset.dx;
-                  yPosition = details.offset.dy;
-
-                  // Mantener dentro de límites
-                  if (xPosition! < 0) xPosition = 0;
-                  if (xPosition! > width - 60) xPosition = width - 60;
-                  if (yPosition! < 0) yPosition = 0;
-                  if (yPosition! > height - 60) yPosition = height - 60;
-
-                  print('🔵 Nueva posición: x=$xPosition, y=$yPosition');
+                  xPosition = local.dx.clamp(0.0, width - _buttonWidth);
+                  yPosition = local.dy.clamp(0.0, height - _buttonHeight);
                 });
               },
               child: GestureDetector(
                 onTap: () {
-                  print('🟠 Tap');
                   widget.onPressed?.call();
                 },
-                child: Container(
-                  width: 60,
-                  height: 60,
-                  decoration: BoxDecoration(
-                    color: widget.backgroundColor ?? Color(0xFF002CE9),
-                    shape: BoxShape.circle,
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black26,
-                        blurRadius: 10,
-                        offset: Offset(0, 4),
-                      ),
-                    ],
-                  ),
-                  child: Icon(
-                    Icons.headset_mic,
-                    color: widget.iconColor ?? Colors.white,
-                    size: 28,
-                  ),
-                ),
+                child: _buildButtonShell(),
               ),
             ),
           ),

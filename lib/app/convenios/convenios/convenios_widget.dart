@@ -83,10 +83,12 @@ class _ConveniosWidgetState extends State<ConveniosWidget> {
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
-        body: Stack(
-          children: [
-            SingleChildScrollView(
-              child: Column(
+        body: custom_widgets.FloatingNavBarScrollScope(
+          child: Stack(
+            children: [
+              custom_widgets.FloatingNavBarScrollListener(
+                child: SingleChildScrollView(
+                  child: Column(
                 mainAxisSize: MainAxisSize.min,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -339,9 +341,14 @@ class _ConveniosWidgetState extends State<ConveniosWidget> {
                       },
                     ),
                   ),
+                  SizedBox(
+                    height: custom_widgets.floatingNavBarClearance(context) +
+                        16.0,
+                  ),
                 ],
+                  ),
+                ),
               ),
-            ),
             Container(
               width: valueOrDefault<double>(
                 MediaQuery.sizeOf(context).width * 1.00,
@@ -430,7 +437,8 @@ class _ConveniosWidgetState extends State<ConveniosWidget> {
                 },
               ),
             ),
-          ],
+            ],
+          ),
         ),
       ),
     );

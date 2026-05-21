@@ -5,7 +5,6 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/instant_timer.dart';
-import 'dart:ui';
 import '/custom_code/widgets/index.dart' as custom_widgets;
 import '/flutter_flow/custom_functions.dart' as functions;
 import '/index.dart';
@@ -121,19 +120,28 @@ class _AhorroMainPageCopyWidgetState extends State<AhorroMainPageCopyWidget> {
           child: Scaffold(
             key: scaffoldKey,
             backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
-            body: Stack(
+            body: custom_widgets.FloatingNavBarScrollScope(
+              child: Stack(
               children: [
-                Align(
-                  alignment: AlignmentDirectional(0.0, 0.0),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.max,
-                    children: [
+                custom_widgets.FloatingNavBarScrollListener(
+                  child: SafeArea(
+                  child: SingleChildScrollView(
+                    physics: const AlwaysScrollableScrollPhysics(),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
                       Padding(
                         padding: EdgeInsetsDirectional.fromSTEB(
                             20.0,
                             valueOrDefault<double>(
-                              MediaQuery.sizeOf(context).height * 0.07584,
-                              64.0,
+                              min(
+                                MediaQuery.sizeOf(context).height * 0.07584,
+                                MediaQuery.sizeOf(context).height < 700
+                                    ? 52.0
+                                    : 72.0,
+                              ),
+                              48.0,
                             ),
                             20.0,
                             0.0),
@@ -360,11 +368,6 @@ class _AhorroMainPageCopyWidgetState extends State<AhorroMainPageCopyWidget> {
                           ),
                         ),
                       ),
-                      Flexible(
-                        child: SingleChildScrollView(
-                          child: Column(
-                            mainAxisSize: MainAxisSize.max,
-                            children: [
                               Padding(
                                 padding: EdgeInsetsDirectional.fromSTEB(
                                     0.0, 24.0, 0.0, 0.0),
@@ -1225,7 +1228,15 @@ class _AhorroMainPageCopyWidgetState extends State<AhorroMainPageCopyWidget> {
                                       opacity: 0.5,
                                       child: Padding(
                                         padding: EdgeInsetsDirectional.fromSTEB(
-                                            0.0, 16.0, 0.0, 65.0),
+                                            0.0,
+                                            16.0,
+                                            0.0,
+                                            max(
+                                              65.0,
+                                              MediaQuery.paddingOf(context)
+                                                      .bottom +
+                                                  32.0,
+                                            )),
                                         child: Row(
                                           mainAxisSize: MainAxisSize.max,
                                           children: [
@@ -1429,12 +1440,10 @@ class _AhorroMainPageCopyWidgetState extends State<AhorroMainPageCopyWidget> {
                                   ],
                                 ),
                               ),
-                            ],
-                          ),
-                        ),
-                      ),
                     ],
                   ),
+                ),
+              ),
                 ),
                 if (responsiveVisibility(
                   context: context,
@@ -1533,6 +1542,7 @@ class _AhorroMainPageCopyWidgetState extends State<AhorroMainPageCopyWidget> {
                     ),
                   ),
               ],
+              ),
             ),
           ),
         );

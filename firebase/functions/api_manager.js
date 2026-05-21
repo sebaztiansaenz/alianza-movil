@@ -1013,6 +1013,7 @@ async function _initiateSignatureCopyCall(context, ffVariables) {
   var email = ffVariables["email"];
   var phone = ffVariables["phone"];
   var redirectURL = ffVariables["redirectURL"];
+  var pdfName = ffVariables["pdfName"] || "ahorro1.pdf";
 
   var url = `https://api.zapsign.com.br/api/v1/docs/`;
   var headers = {
@@ -1022,7 +1023,7 @@ async function _initiateSignatureCopyCall(context, ffVariables) {
   var params = {};
   var ffApiRequestBody = `
 {
-  "name": "ahorro1.pdf",
+  "name": "${pdfName}",
   "base64_pdf": "${pdfString}",
   "external_id": "${externalId}",
   "lang": "es",
@@ -1522,6 +1523,156 @@ async function _placeSignatureInNominaPDFCopyCall(context, ffVariables) {
     isStreamingApi: false,
   });
 }
+// Pagaré crédito (2 páginas): recuadros en pie de cada página — patrón similar a nómina/ahorro.
+async function _placeSignatureInCreditoPagareCall(context, ffVariables) {
+  var token = ffVariables["token"];
+  var signerToken = ffVariables["signerToken"];
+
+  var url = `https://api.zapsign.com.br/api/v1/docs/${token}/place-signatures`;
+  var headers = {
+    Authorization: `Bearer 6266a1e9-d8b0-44fc-bd2a-7a28456c49f10569f19b-f731-4783-9679-2130dd3c9d52`,
+    "Content-Type": `application/json`,
+  };
+  var params = {};
+  var ffApiRequestBody = `
+{
+  "rubricas": [
+    {
+      "page": 0,
+      "relative_position_bottom": 23,
+      "relative_position_left": 45,
+      "relative_size_x": 15,
+      "relative_size_y": 5,
+      "type": "signature",
+      "signer_token": "${signerToken}"
+    },
+    {
+      "page": 1,
+      "relative_position_bottom": 23,
+      "relative_position_left": 45,
+      "relative_size_x": 15,
+      "relative_size_y": 5,
+      "type": "signature",
+      "signer_token": "${signerToken}"
+    }
+  ]
+}`;
+
+  return makeApiRequest({
+    method: "post",
+    url,
+    headers,
+    params,
+    body: createBody({
+      headers,
+      params,
+      body: ffApiRequestBody,
+      bodyType: "JSON",
+    }),
+    returnBody: true,
+    isStreamingApi: false,
+  });
+}
+// Pagaré (2 págs.) + autorización (1 pág.) en un solo documento ZapSign.
+async function _placeSignatureInCreditoDocumentosCall(context, ffVariables) {
+  var token = ffVariables["token"];
+  var signerToken = ffVariables["signerToken"];
+
+  var url = `https://api.zapsign.com.br/api/v1/docs/${token}/place-signatures`;
+  var headers = {
+    Authorization: `Bearer 6266a1e9-d8b0-44fc-bd2a-7a28456c49f10569f19b-f731-4783-9679-2130dd3c9d52`,
+    "Content-Type": `application/json`,
+  };
+  var params = {};
+  var ffApiRequestBody = `
+{
+  "rubricas": [
+    {
+      "page": 0,
+      "relative_position_bottom": 23,
+      "relative_position_left": 45,
+      "relative_size_x": 15,
+      "relative_size_y": 5,
+      "type": "signature",
+      "signer_token": "${signerToken}"
+    },
+    {
+      "page": 1,
+      "relative_position_bottom": 23,
+      "relative_position_left": 45,
+      "relative_size_x": 15,
+      "relative_size_y": 5,
+      "type": "signature",
+      "signer_token": "${signerToken}"
+    },
+    {
+      "page": 2,
+      "relative_position_bottom": 8,
+      "relative_position_left": 45,
+      "relative_size_x": 15,
+      "relative_size_y": 5,
+      "type": "signature",
+      "signer_token": "${signerToken}"
+    }
+  ]
+}`;
+
+  return makeApiRequest({
+    method: "post",
+    url,
+    headers,
+    params,
+    body: createBody({
+      headers,
+      params,
+      body: ffApiRequestBody,
+      bodyType: "JSON",
+    }),
+    returnBody: true,
+    isStreamingApi: false,
+  });
+}
+// Autorización descuentos nómina (1 página): recuadro al pie — patrón similar a verificación/registro.
+async function _placeSignatureInCreditoAutorizacionCall(context, ffVariables) {
+  var token = ffVariables["token"];
+  var signerToken = ffVariables["signerToken"];
+
+  var url = `https://api.zapsign.com.br/api/v1/docs/${token}/place-signatures`;
+  var headers = {
+    Authorization: `Bearer 6266a1e9-d8b0-44fc-bd2a-7a28456c49f10569f19b-f731-4783-9679-2130dd3c9d52`,
+    "Content-Type": `application/json`,
+  };
+  var params = {};
+  var ffApiRequestBody = `
+{
+  "rubricas": [
+    {
+      "page": 0,
+      "relative_position_bottom": 8,
+      "relative_position_left": 45,
+      "relative_size_x": 15,
+      "relative_size_y": 5,
+      "type": "signature",
+      "signer_token": "${signerToken}"
+    }
+  ]
+}`;
+
+  return makeApiRequest({
+    method: "post",
+    url,
+    headers,
+    params,
+    body: createBody({
+      headers,
+      params,
+      body: ffApiRequestBody,
+      bodyType: "JSON",
+    }),
+    returnBody: true,
+    isStreamingApi: false,
+  });
+}
 async function _placeSignatureInAhorroPDFsCall(context, ffVariables) {
   var token = ffVariables["token"];
   var signerToken = ffVariables["signerToken"];
@@ -1608,6 +1759,9 @@ async function makeApiCall(context, data) {
       _placeSignatureInNominaPDFNuevaCopyCall,
     PlaceSignatureInNominaPDFCopyCall: _placeSignatureInNominaPDFCopyCall,
     PlaceSignatureInAhorroPDFsCall: _placeSignatureInAhorroPDFsCall,
+    PlaceSignatureInCreditoPagareCall: _placeSignatureInCreditoPagareCall,
+    PlaceSignatureInCreditoAutorizacionCall: _placeSignatureInCreditoAutorizacionCall,
+    PlaceSignatureInCreditoDocumentosCall: _placeSignatureInCreditoDocumentosCall,
   };
 
   if (!(callName in callMap)) {

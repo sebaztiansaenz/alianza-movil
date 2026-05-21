@@ -797,7 +797,6 @@ class _DetallesTransaccionRetiroCopyWidgetState
                               20.0, 37.0, 20.0, 0.0),
                           child: Container(
                             width: MediaQuery.sizeOf(context).width * 1.0,
-                            height: 74.0,
                             decoration: BoxDecoration(
                               color: FlutterFlowTheme.of(context)
                                   .secondaryBackground,
@@ -820,7 +819,7 @@ class _DetallesTransaccionRetiroCopyWidgetState
                             child: Padding(
                               padding: EdgeInsets.all(14.0),
                               child: Column(
-                                mainAxisSize: MainAxisSize.max,
+                                mainAxisSize: MainAxisSize.min,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   AutoSizeText(
@@ -846,6 +845,7 @@ class _DetallesTransaccionRetiroCopyWidgetState
                                           : widget!.detalles,
                                       '- - -',
                                     ),
+                                    maxLines: 4,
                                     style: FlutterFlowTheme.of(context)
                                         .bodyMedium
                                         .override(

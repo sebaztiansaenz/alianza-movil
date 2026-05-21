@@ -1,6 +1,7 @@
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/flutter_flow/session_inactivity.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'dart:ui';
 import '/index.dart';
@@ -21,7 +22,7 @@ class BienvenidacreditoWidget extends StatefulWidget {
       _BienvenidacreditoWidgetState();
 }
 
-class _BienvenidacreditoWidgetState extends State<BienvenidacreditoWidget> {
+class _BienvenidacreditoWidgetState extends State<BienvenidacreditoWidget> with SessionActivityOnInitMixin {
   late BienvenidacreditoModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();

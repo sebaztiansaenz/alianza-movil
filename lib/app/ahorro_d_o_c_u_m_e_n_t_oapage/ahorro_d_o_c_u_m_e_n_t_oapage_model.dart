@@ -6,7 +6,6 @@ import '/flutter_flow/flutter_flow_pdf_viewer.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import '/flutter_flow/instant_timer.dart';
 import 'dart:math';
 import 'dart:ui';
 import '/custom_code/actions/index.dart' as actions;
@@ -26,13 +25,16 @@ class AhorroDOCUMENTOapageModel
     extends FlutterFlowModel<AhorroDOCUMENTOapageWidget> {
   ///  Local state fields for this page.
 
-  String? pdfURL;
+  bool isLoadingPdf = true;
+
+  bool isSigning = false;
+
+  String? pdfError;
 
   ///  State fields for stateful widgets in this page.
 
   // Stores action output result for [Custom Action - firstPDFCopy] action in Ahorro_DOCUMENTOapage widget.
   FFUploadedFile? pdf2;
-  InstantTimer? nomina;
   // Stores action output result for [Firestore Query - Query a collection] action in Button widget.
   ServicesRecord? service;
   // Stores action output result for [Backend Call - Create Document] action in Button widget.
@@ -46,7 +48,5 @@ class AhorroDOCUMENTOapageModel
   void initState(BuildContext context) {}
 
   @override
-  void dispose() {
-    nomina?.cancel();
-  }
+  void dispose() {}
 }

@@ -443,6 +443,46 @@ exports.zapsignWebhook = functions
           console.log(
             `Cdats document ${documentId} updated with signed document and firmado set to true.`,
           );
+        } else if (
+          name === "credito_documentos.pdf" ||
+          name === "credito_pagare.pdf" ||
+          name === "credito_autorizacion_nomina.pdf"
+        ) {
+          const hbRef = db.collection("HabilitarCredito").doc(documentId);
+          const hbSnap = await hbRef.get();
+
+          if (!hbSnap.exists) {
+            console.error(
+              `HabilitarCredito document ${documentId} not found.`,
+            );
+            return res.status(404).send("HabilitarCredito document not found");
+          }
+
+          const hbData = hbSnap.data();
+          const usuarioUid = hbData.usuarioUid;
+
+          if (name === "credito_documentos.pdf") {
+            updateData = {
+              creditoDocPagareUrl: downloadURL,
+              creditoDocAutorizacionNominaUrl: downloadURL,
+            };
+          } else if (name === "credito_pagare.pdf") {
+            updateData = { creditoDocPagareUrl: downloadURL };
+          } else {
+            updateData = {
+              creditoDocAutorizacionNominaUrl: downloadURL,
+            };
+          }
+
+          await hbRef.update(updateData);
+          console.log(
+            `HabilitarCredito ${documentId} updated (${name}): ${downloadURL}`,
+          );
+
+          if (usuarioUid) {
+            await db.collection("user").doc(usuarioUid).update(updateData);
+            console.log(`User ${usuarioUid} synced with ${name} URL.`);
+          }
         } else {
           console.log(`No specific action defined for document name: ${name}`);
         }

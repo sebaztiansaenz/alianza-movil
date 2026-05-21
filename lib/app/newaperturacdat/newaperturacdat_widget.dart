@@ -20,6 +20,14 @@ class NewaperturacdatWidget extends StatefulWidget {
 class _NewaperturacdatWidgetState extends State<NewaperturacdatWidget> {
   late NewaperturacdatModel _model;
 
+  /// Cierra el [showDialog]. [navigatedAway] = true si ya se fue a otra pantalla.
+  void _closeModal({bool navigatedAway = false}) {
+    final navigator = Navigator.of(context, rootNavigator: true);
+    if (navigator.canPop()) {
+      navigator.pop(navigatedAway);
+    }
+  }
+
   @override
   void setState(VoidCallback callback) {
     super.setState(callback);
@@ -72,7 +80,7 @@ class _NewaperturacdatWidgetState extends State<NewaperturacdatWidget> {
                     hoverColor: Colors.transparent,
                     highlightColor: Colors.transparent,
                     onTap: () async {
-                      context.pushNamed(AHORROSPage1CopyCopyWidget.routeName);
+                      _closeModal();
                     },
                     child: Container(
                       width: 24.0,
@@ -273,6 +281,8 @@ class _NewaperturacdatWidgetState extends State<NewaperturacdatWidget> {
                       0.0),
                   child: FFButtonWidget(
                     onPressed: () async {
+                      _closeModal(navigatedAway: true);
+                      if (!context.mounted) return;
                       context.goNamed(
                         MisinversionesWidget.routeName,
                         extra: <String, dynamic>{

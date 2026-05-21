@@ -639,18 +639,8 @@ String convertToBase64String(FFUploadedFile uploadedPDF) {
 }
 
 bool past5Mins(DateTime lastAction) {
-  final currentTime = DateTime.now();
-  final diferencia = currentTime.difference(lastAction).inMinutes;
-  final resultado = diferencia >= 8;
-
-  debugPrint('========== past5Mins ==========');
-  debugPrint('🕐 Hora actual     : $currentTime');
-  debugPrint('📌 Última acción   : $lastAction');
-  debugPrint('⏱️  Diferencia (min): $diferencia');
-  debugPrint('✅ Resultado (>=8m): $resultado');
-  debugPrint('================================');
-
-  return resultado;
+  // Nombre histórico FlutterFlow; el umbral real es 8 min (kSessionInactivityMinutes).
+  return DateTime.now().difference(lastAction).inMinutes >= 8;
 }
 
 int contarCaracteres(String text) {

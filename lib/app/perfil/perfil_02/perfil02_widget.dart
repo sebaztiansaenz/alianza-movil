@@ -75,9 +75,11 @@ class _Perfil02WidgetState extends State<Perfil02Widget> {
     return Scaffold(
       key: scaffoldKey,
       backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
-      body: Stack(
+      body: custom_widgets.FloatingNavBarScrollScope(
+        child: Stack(
         children: [
-          Padding(
+          custom_widgets.FloatingNavBarScrollListener(
+            child: Padding(
             padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 40.0),
             child: Column(
               mainAxisSize: MainAxisSize.max,
@@ -1056,6 +1058,7 @@ class _Perfil02WidgetState extends State<Perfil02Widget> {
               ],
             ),
           ),
+          ),
           Container(
             width: valueOrDefault<double>(
               MediaQuery.sizeOf(context).width * 1.00,
@@ -1145,6 +1148,7 @@ class _Perfil02WidgetState extends State<Perfil02Widget> {
             ),
           ),
         ],
+        ),
       ),
     );
   }

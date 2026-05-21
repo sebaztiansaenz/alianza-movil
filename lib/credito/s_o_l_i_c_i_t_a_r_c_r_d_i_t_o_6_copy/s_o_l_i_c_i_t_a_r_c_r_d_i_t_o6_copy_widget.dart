@@ -1,6 +1,7 @@
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/flutter_flow/session_inactivity.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/pages/sucess_mensaje_error/sucess_mensaje_error_widget.dart';
 import 'dart:ui';
@@ -58,7 +59,7 @@ class SOLICITARCRDITO6CopyWidget extends StatefulWidget {
 }
 
 class _SOLICITARCRDITO6CopyWidgetState
-    extends State<SOLICITARCRDITO6CopyWidget> {
+    extends State<SOLICITARCRDITO6CopyWidget> with SessionActivityOnInitMixin {
   late SOLICITARCRDITO6CopyModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
