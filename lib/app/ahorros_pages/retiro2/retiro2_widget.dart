@@ -259,9 +259,7 @@ class _Retiro2WidgetState extends State<Retiro2Widget>
                                       padding: EdgeInsetsDirectional.fromSTEB(
                                           0.0, 0.0, 20.0, 0.0),
                                       child: Container(
-                                        width:
-                                            MediaQuery.sizeOf(context).width *
-                                                1.0,
+                                        width: double.infinity,
                                         height: 98.0,
                                         decoration: BoxDecoration(
                                           color: FlutterFlowTheme.of(context)
@@ -291,132 +289,124 @@ class _Retiro2WidgetState extends State<Retiro2Widget>
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.end,
                                             children: [
-                                              Stack(
-                                                children: [
-                                                  Padding(
-                                                    padding:
-                                                        EdgeInsetsDirectional
-                                                            .fromSTEB(16.0, 0.0,
-                                                                0.0, 0.0),
-                                                    child: Row(
-                                                      mainAxisSize:
-                                                          MainAxisSize.max,
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .start,
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .start,
-                                                      children: [
-                                                        Expanded(
-                                                          child: Padding(
-                                                            padding:
-                                                                EdgeInsetsDirectional
-                                                                    .fromSTEB(
-                                                                        0.0,
-                                                                        16.0,
-                                                                        0.0,
-                                                                        0.0),
-                                                            child: Row(
-                                                              mainAxisSize:
-                                                                  MainAxisSize
-                                                                      .max,
-                                                              crossAxisAlignment:
-                                                                  CrossAxisAlignment
-                                                                      .start,
+                                              Padding(
+                                                padding:
+                                                    EdgeInsetsDirectional
+                                                        .fromSTEB(
+                                                            16.0, 0.0, 16.0, 0.0),
+                                                child: Row(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    Expanded(
+                                                      child: Padding(
+                                                        padding:
+                                                            EdgeInsetsDirectional
+                                                                .fromSTEB(
+                                                                    0.0,
+                                                                    16.0,
+                                                                    8.0,
+                                                                    0.0),
+                                                        child: Column(
+                                                          mainAxisSize:
+                                                              MainAxisSize.min,
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .start,
+                                                          children: [
+                                                            Row(
                                                               children: [
-                                                                Column(
-                                                                  mainAxisSize:
-                                                                      MainAxisSize
-                                                                          .max,
-                                                                  crossAxisAlignment:
-                                                                      CrossAxisAlignment
-                                                                          .start,
-                                                                  children: [
-                                                                    Row(
-                                                                      mainAxisSize:
-                                                                          MainAxisSize
-                                                                              .max,
-                                                                      children: [
-                                                                        Padding(
-                                                                          padding: EdgeInsetsDirectional.fromSTEB(
-                                                                              0.0,
-                                                                              0.0,
-                                                                              8.0,
-                                                                              0.0),
-                                                                          child:
-                                                                              Image.asset(
-                                                                            'assets/images/Group_3.png',
-                                                                            width:
-                                                                                14.0,
-                                                                            height:
-                                                                                20.0,
-                                                                            fit:
-                                                                                BoxFit.cover,
-                                                                          ),
-                                                                        ),
-                                                                        Text(
-                                                                          valueOrDefault<
-                                                                              String>(
-                                                                            retiro2AhorrosRecord.savingsType,
-                                                                            '- - -',
-                                                                          ),
-                                                                          style: FlutterFlowTheme.of(context)
-                                                                              .bodyMedium
-                                                                              .override(
-                                                                                fontFamily: 'Satoshi',
-                                                                                color: Color(0xFF002CE9),
-                                                                                letterSpacing: 0.0,
-                                                                                fontWeight: FontWeight.bold,
-                                                                              ),
-                                                                        ),
-                                                                      ],
+                                                                Padding(
+                                                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                                                      0.0,
+                                                                      0.0,
+                                                                      8.0,
+                                                                      0.0),
+                                                                  child:
+                                                                      Image.asset(
+                                                                    'assets/images/Group_3.png',
+                                                                    width: 14.0,
+                                                                    height: 20.0,
+                                                                    fit: BoxFit
+                                                                        .cover,
+                                                                  ),
+                                                                ),
+                                                                Expanded(
+                                                                  child: Text(
+                                                                    valueOrDefault<
+                                                                        String>(
+                                                                      retiro2AhorrosRecord
+                                                                          .savingsType,
+                                                                      '- - -',
                                                                     ),
-                                                                    AuthUserStreamWidget(
-                                                                      builder:
-                                                                          (context) =>
-                                                                              Text(
-                                                                        valueOrDefault<
-                                                                            String>(
-                                                                          '# ${valueOrDefault(currentUserDocument?.nit, '')}-0${widget!.numero?.toString()}',
-                                                                          '0',
+                                                                    maxLines: 2,
+                                                                    overflow:
+                                                                        TextOverflow
+                                                                            .ellipsis,
+                                                                    style: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .bodyMedium
+                                                                        .override(
+                                                                          fontFamily:
+                                                                              'Satoshi',
+                                                                          color: Color(
+                                                                              0xFF002CE9),
+                                                                          letterSpacing:
+                                                                              0.0,
+                                                                          fontWeight:
+                                                                              FontWeight.bold,
                                                                         ),
-                                                                        style: FlutterFlowTheme.of(context)
-                                                                            .bodyMedium
-                                                                            .override(
-                                                                              fontFamily: 'Satoshi',
-                                                                              color: Color(0xB3262632),
-                                                                              fontSize: 12.0,
-                                                                              letterSpacing: 0.0,
-                                                                            ),
-                                                                      ),
-                                                                    ),
-                                                                  ],
+                                                                  ),
                                                                 ),
                                                               ],
                                                             ),
-                                                          ),
-                                                        ),
-                                                        Expanded(
-                                                          child: Align(
-                                                            alignment:
-                                                                AlignmentDirectional(
-                                                                    1.0, -1.0),
-                                                            child: Image.asset(
-                                                              'assets/images/Frame_2085662540_(5).png',
-                                                              width: 54.0,
-                                                              height: 22.0,
-                                                              fit: BoxFit.fill,
+                                                            AuthUserStreamWidget(
+                                                              builder: (context) =>
+                                                                  Text(
+                                                                valueOrDefault<
+                                                                    String>(
+                                                                  '# ${valueOrDefault(currentUserDocument?.nit, '')}-0${widget!.numero?.toString()}',
+                                                                  '0',
+                                                                ),
+                                                                style: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyMedium
+                                                                    .override(
+                                                                      fontFamily:
+                                                                          'Satoshi',
+                                                                      color: Color(
+                                                                          0xB3262632),
+                                                                      fontSize:
+                                                                          12.0,
+                                                                      letterSpacing:
+                                                                          0.0,
+                                                                    ),
+                                                              ),
                                                             ),
-                                                          ),
+                                                          ],
                                                         ),
-                                                      ],
+                                                      ),
                                                     ),
-                                                  ),
-                                                ],
+                                                    Padding(
+                                                      padding:
+                                                          EdgeInsetsDirectional
+                                                              .fromSTEB(
+                                                                  0.0,
+                                                                  16.0,
+                                                                  0.0,
+                                                                  0.0),
+                                                      child: Image.asset(
+                                                        'assets/images/Frame_2085662540_(5).png',
+                                                        width: 54.0,
+                                                        height: 22.0,
+                                                        fit: BoxFit.contain,
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
                                               ),
                                               Row(
-                                                mainAxisSize: MainAxisSize.min,
+                                                mainAxisSize: MainAxisSize.max,
                                                 mainAxisAlignment:
                                                     MainAxisAlignment.end,
                                                 children: [
@@ -429,85 +419,70 @@ class _Retiro2WidgetState extends State<Retiro2Widget>
                                                           ?.firstOrNull
                                                           ?.total !=
                                                       null)
-                                                    Padding(
-                                                      padding:
-                                                          EdgeInsetsDirectional
-                                                              .fromSTEB(
-                                                                  0.0,
-                                                                  0.0,
-                                                                  14.0,
-                                                                  0.0),
-                                                      child: Text(
-                                                        valueOrDefault<String>(
-                                                          functions.formatAmount(
+                                                    Expanded(
+                                                      child: Padding(
+                                                        padding:
+                                                            EdgeInsetsDirectional
+                                                                .fromSTEB(
+                                                                    0.0,
+                                                                    0.0,
+                                                                    14.0,
+                                                                    0.0),
+                                                        child: Align(
+                                                          alignment:
+                                                              AlignmentDirectional
+                                                                  .centerEnd,
+                                                          child: FittedBox(
+                                                            fit: BoxFit.scaleDown,
+                                                            alignment: Alignment
+                                                                .centerRight,
+                                                            child: Text(
                                                               valueOrDefault<
-                                                                  double>(
-                                                            valueOrDefault<
-                                                                    double>(
-                                                                  valueOrDefault<
-                                                                          double>(
-                                                                        _model
-                                                                            .totalesAhorro
-                                                                            .where((e) =>
-                                                                                e.ahorroid ==
-                                                                                valueOrDefault<String>(
-                                                                                  retiro2AhorrosRecord.reference.id,
-                                                                                  '0',
-                                                                                ))
-                                                                            .toList()
-                                                                            .firstOrNull
-                                                                            ?.total,
-                                                                        0.0,
-                                                                      ) -
+                                                                  String>(
+                                                                functions.formatAmount(
+                                                                    valueOrDefault<
+                                                                        double>(
                                                                       valueOrDefault<
-                                                                          double>(
-                                                                        _model
-                                                                            .retirosAhorro
-                                                                            .where((e) =>
-                                                                                e.ahorroid ==
-                                                                                valueOrDefault<String>(
-                                                                                  retiro2AhorrosRecord.reference.id,
-                                                                                  '0',
-                                                                                ))
-                                                                            .toList()
-                                                                            .firstOrNull
-                                                                            ?.total,
-                                                                        0.0,
-                                                                      ),
-                                                                  0.0,
-                                                                ) +
-                                                                valueOrDefault<
-                                                                    double>(
-                                                                  functions.sumaTotal(retiro2AhorrosRecord
-                                                                      .transactions
-                                                                      .map((e) =>
+                                                                              double>(
+                                                                            valueOrDefault<
+                                                                                    double>(
+                                                                                  _model.totalesAhorro.where((e) => e.ahorroid == valueOrDefault<String>(retiro2AhorrosRecord.reference.id, '0')).toList().firstOrNull?.total,
+                                                                                  0.0,
+                                                                                ) -
+                                                                                valueOrDefault<double>(
+                                                                                  _model.retirosAhorro.where((e) => e.ahorroid == valueOrDefault<String>(retiro2AhorrosRecord.reference.id, '0')).toList().firstOrNull?.total,
+                                                                                  0.0,
+                                                                                ),
+                                                                            0.0,
+                                                                          ) +
                                                                           valueOrDefault<
                                                                               double>(
-                                                                            e.taxedBenefit,
+                                                                            functions.sumaTotal(retiro2AhorrosRecord.transactions.map((e) => valueOrDefault<double>(e.taxedBenefit, 0.0)).toList()),
                                                                             0.0,
-                                                                          ))
-                                                                      .toList()),
-                                                                  0.0,
-                                                                ),
-                                                            0.0,
-                                                          )),
-                                                          '\$0',
-                                                        ),
-                                                        style: FlutterFlowTheme
-                                                                .of(context)
-                                                            .bodyMedium
-                                                            .override(
-                                                              fontFamily:
-                                                                  'Satoshi',
-                                                              color: Color(
-                                                                  0xFF002CE9),
-                                                              fontSize: 24.0,
-                                                              letterSpacing:
-                                                                  0.0,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w900,
+                                                                          ),
+                                                                      0.0,
+                                                                    )),
+                                                                '\$0',
+                                                              ),
+                                                              style: FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .bodyMedium
+                                                                  .override(
+                                                                    fontFamily:
+                                                                        'Satoshi',
+                                                                    color: Color(
+                                                                        0xFF002CE9),
+                                                                    fontSize:
+                                                                        24.0,
+                                                                    letterSpacing:
+                                                                        0.0,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w900,
+                                                                  ),
                                                             ),
+                                                          ),
+                                                        ),
                                                       ),
                                                     ),
                                                   if (_model.transactionsTotal

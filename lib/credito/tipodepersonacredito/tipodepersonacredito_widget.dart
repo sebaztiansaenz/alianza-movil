@@ -1,6 +1,7 @@
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/flutter_flow/session_inactivity.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'dart:ui';
 import 'package:flutter/material.dart';
@@ -21,7 +22,7 @@ class TipodepersonacreditoWidget extends StatefulWidget {
 }
 
 class _TipodepersonacreditoWidgetState
-    extends State<TipodepersonacreditoWidget> {
+    extends State<TipodepersonacreditoWidget> with SessionActivityOnInitMixin {
   late TipodepersonacreditoModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();

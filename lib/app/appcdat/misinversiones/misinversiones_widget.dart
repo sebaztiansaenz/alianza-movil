@@ -80,15 +80,16 @@ class _MisinversionesWidgetState extends State<MisinversionesWidget> {
     context.watch<FFAppState>();
 
     return StreamBuilder<List<CdatsRecord>>(
-      stream: queryCdatsRecord(
-        queryBuilder: (cdatsRecord) => cdatsRecord.where(
-          'Idusuario',
-          isEqualTo: currentUserReference,
-        ),
-      ),
+      stream: currentUserReference != null
+          ? queryCdatsRecord(
+              queryBuilder: (cdatsRecord) => cdatsRecord.where(
+                'Idusuario',
+                isEqualTo: currentUserReference,
+              ),
+            )
+          : Stream.value(const <CdatsRecord>[]),
       builder: (context, snapshot) {
-        // Customize what your widget looks like when it's loading.
-        if (!snapshot.hasData) {
+        if (!snapshot.hasData && !snapshot.hasError) {
           return Scaffold(
             backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
             body: Center(
@@ -104,7 +105,8 @@ class _MisinversionesWidgetState extends State<MisinversionesWidget> {
             ),
           );
         }
-        List<CdatsRecord> misinversionesCdatsRecordList = snapshot.data!;
+        final List<CdatsRecord> misinversionesCdatsRecordList =
+            snapshot.hasData ? snapshot.data! : const <CdatsRecord>[];
 
         return GestureDetector(
           onTap: () {
@@ -114,21 +116,24 @@ class _MisinversionesWidgetState extends State<MisinversionesWidget> {
           child: Scaffold(
             key: scaffoldKey,
             backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
-            body: Stack(
+            body: custom_widgets.FloatingNavBarScrollScope(
+              child: Stack(
               children: [
-                Column(
-                  mainAxisSize: MainAxisSize.min,
+                custom_widgets.FloatingNavBarScrollListener(
+                  child: Column(
+                  mainAxisSize: MainAxisSize.max,
                   children: [
                     StreamBuilder<List<CdatsRecord>>(
-                      stream: queryCdatsRecord(
-                        queryBuilder: (cdatsRecord) => cdatsRecord.where(
-                          'Idusuario',
-                          isEqualTo: currentUserReference,
-                        ),
-                      ),
+                      stream: currentUserReference != null
+                          ? queryCdatsRecord(
+                              queryBuilder: (cdatsRecord) => cdatsRecord.where(
+                                'Idusuario',
+                                isEqualTo: currentUserReference,
+                              ),
+                            )
+                          : Stream.value(const <CdatsRecord>[]),
                       builder: (context, snapshot) {
-                        // Customize what your widget looks like when it's loading.
-                        if (!snapshot.hasData) {
+                        if (!snapshot.hasData && !snapshot.hasError) {
                           return Center(
                             child: SizedBox(
                               width: 50.0,
@@ -141,8 +146,10 @@ class _MisinversionesWidgetState extends State<MisinversionesWidget> {
                             ),
                           );
                         }
-                        List<CdatsRecord> containerCdatsRecordList =
-                            snapshot.data!;
+                        final List<CdatsRecord> containerCdatsRecordList =
+                            snapshot.hasData
+                                ? snapshot.data!
+                                : const <CdatsRecord>[];
 
                         return Container(
                           decoration: BoxDecoration(
@@ -206,22 +213,21 @@ class _MisinversionesWidgetState extends State<MisinversionesWidget> {
                                       Flexible(
                                         child:
                                             StreamBuilder<List<AhorrosRecord>>(
-                                          stream: queryAhorrosRecord(
-                                            queryBuilder: (ahorrosRecord) =>
-                                                ahorrosRecord
-                                                    .where(
-                                                      'user',
-                                                      isEqualTo:
-                                                          currentUserReference,
-                                                    )
-                                                    .where(
-                                                      'AhorrosDocPdf1',
-                                                      isNotEqualTo: '',
-                                                    ),
-                                          ),
+                                          stream: currentUserReference != null
+                                              ? queryAhorrosRecord(
+                                                  queryBuilder:
+                                                      (ahorrosRecord) =>
+                                                          ahorrosRecord.where(
+                                                    'user',
+                                                    isEqualTo:
+                                                        currentUserReference,
+                                                  ),
+                                                )
+                                              : Stream.value(
+                                                  const <AhorrosRecord>[]),
                                           builder: (context, snapshot) {
-                                            // Customize what your widget looks like when it's loading.
-                                            if (!snapshot.hasData) {
+                                            if (!snapshot.hasData &&
+                                                !snapshot.hasError) {
                                               return Center(
                                                 child: SizedBox(
                                                   width: 50.0,
@@ -239,9 +245,16 @@ class _MisinversionesWidgetState extends State<MisinversionesWidget> {
                                                 ),
                                               );
                                             }
-                                            List<AhorrosRecord>
+                                            final List<AhorrosRecord>
                                                 containerAhorrosRecordList =
-                                                snapshot.data!;
+                                                (snapshot.hasData
+                                                        ? snapshot.data!
+                                                        : const <
+                                                            AhorrosRecord>[])
+                                                    .where((e) => e
+                                                        .ahorrosDocPdf1
+                                                        .isNotEmpty)
+                                                    .toList();
 
                                             return Container(
                                               width: valueOrDefault<double>(
@@ -351,10 +364,9 @@ class _MisinversionesWidgetState extends State<MisinversionesWidget> {
                                   ),
                                 ),
                                 Row(
-                                  mainAxisSize: MainAxisSize.max,
                                   children: [
-                                    Container(
-                                      width: 209.0,
+                                    Expanded(
+                                      child: Container(
                                       height: valueOrDefault<double>(
                                         MediaQuery.sizeOf(context).height *
                                             0.06162,
@@ -375,7 +387,8 @@ class _MisinversionesWidgetState extends State<MisinversionesWidget> {
                                         child: Row(
                                           mainAxisSize: MainAxisSize.max,
                                           children: [
-                                            InkWell(
+                                            Expanded(
+                                              child: InkWell(
                                               splashColor: Colors.transparent,
                                               focusColor: Colors.transparent,
                                               hoverColor: Colors.transparent,
@@ -399,7 +412,6 @@ class _MisinversionesWidgetState extends State<MisinversionesWidget> {
                                                 );
                                               },
                                               child: Container(
-                                                width: 100.0,
                                                 height: 44.0,
                                                 decoration: BoxDecoration(
                                                   color: FlutterFlowTheme.of(
@@ -442,7 +454,9 @@ class _MisinversionesWidgetState extends State<MisinversionesWidget> {
                                                 ),
                                               ),
                                             ),
-                                            InkWell(
+                                            ),
+                                            Expanded(
+                                              child: InkWell(
                                               splashColor: Colors.transparent,
                                               focusColor: Colors.transparent,
                                               hoverColor: Colors.transparent,
@@ -466,7 +480,6 @@ class _MisinversionesWidgetState extends State<MisinversionesWidget> {
                                                 );
                                               },
                                               child: Container(
-                                                width: 100.0,
                                                 height: 44.0,
                                                 decoration: BoxDecoration(
                                                   color: FlutterFlowTheme.of(
@@ -509,12 +522,15 @@ class _MisinversionesWidgetState extends State<MisinversionesWidget> {
                                                 ),
                                               ),
                                             ),
+                                            ),
                                           ],
                                         ),
                                       ),
                                     ),
-                                    Container(
-                                      width: 133.0,
+                                    ),
+                                    SizedBox(width: 8.0),
+                                    Expanded(
+                                      child: Container(
                                       height: valueOrDefault<double>(
                                         MediaQuery.sizeOf(context).height *
                                             0.06162,
@@ -532,9 +548,11 @@ class _MisinversionesWidgetState extends State<MisinversionesWidget> {
                                       ),
                                       child: Padding(
                                         padding: EdgeInsetsDirectional.fromSTEB(
-                                            20.0, 0.0, 20.0, 0.0),
+                                            12.0, 0.0, 12.0, 0.0),
                                         child: Row(
-                                          mainAxisSize: MainAxisSize.max,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          mainAxisSize: MainAxisSize.min,
                                           children: [
                                             Container(
                                               width: 20.0,
@@ -548,32 +566,39 @@ class _MisinversionesWidgetState extends State<MisinversionesWidget> {
                                                 ),
                                               ),
                                             ),
-                                            Text(
-                                              'Inversión',
-                                              style: FlutterFlowTheme.of(
-                                                      context)
-                                                  .bodyMedium
-                                                  .override(
-                                                    fontFamily: 'Satoshi',
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .secondaryBackground,
-                                                    fontSize:
-                                                        valueOrDefault<double>(
-                                                      MediaQuery.sizeOf(context)
-                                                              .height *
-                                                          0.01659,
-                                                      14.0,
+                                            Flexible(
+                                              child: Text(
+                                                'Inversión',
+                                                overflow: TextOverflow.ellipsis,
+                                                maxLines: 1,
+                                                style: FlutterFlowTheme.of(
+                                                        context)
+                                                    .bodyMedium
+                                                    .override(
+                                                      fontFamily: 'Satoshi',
+                                                      color: FlutterFlowTheme.of(
+                                                              context)
+                                                          .secondaryBackground,
+                                                      fontSize:
+                                                          valueOrDefault<double>(
+                                                        MediaQuery.sizeOf(
+                                                                context)
+                                                            .height *
+                                                            0.01659,
+                                                        14.0,
+                                                      ),
+                                                      letterSpacing: 0.0,
+                                                      fontWeight:
+                                                          FontWeight.bold,
                                                     ),
-                                                    letterSpacing: 0.0,
-                                                    fontWeight: FontWeight.bold,
-                                                  ),
+                                              ),
                                             ),
                                           ].divide(SizedBox(width: 8.0)),
                                         ),
                                       ),
                                     ),
-                                  ].divide(SizedBox(width: 8.0)),
+                                    ),
+                                  ],
                                 ),
                               ],
                             ),
@@ -584,7 +609,7 @@ class _MisinversionesWidgetState extends State<MisinversionesWidget> {
                     Flexible(
                       child: SingleChildScrollView(
                         child: Column(
-                          mainAxisSize: MainAxisSize.max,
+                          mainAxisSize: MainAxisSize.min,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Padding(
@@ -597,7 +622,7 @@ class _MisinversionesWidgetState extends State<MisinversionesWidget> {
                                   20.0,
                                   0.0),
                               child: Container(
-                                width: MediaQuery.sizeOf(context).width * 1.0,
+                                width: double.infinity,
                                 decoration: BoxDecoration(
                                   color: FlutterFlowTheme.of(context).secondary,
                                   image: DecorationImage(
@@ -618,7 +643,7 @@ class _MisinversionesWidgetState extends State<MisinversionesWidget> {
                                         20.0,
                                       )),
                                       child: Column(
-                                        mainAxisSize: MainAxisSize.max,
+                                        mainAxisSize: MainAxisSize.min,
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
                                         children: [
@@ -701,10 +726,10 @@ class _MisinversionesWidgetState extends State<MisinversionesWidget> {
                                                     ),
                                                     child: Column(
                                                       mainAxisSize:
-                                                          MainAxisSize.max,
+                                                          MainAxisSize.min,
                                                       crossAxisAlignment:
                                                           CrossAxisAlignment
-                                                              .center,
+                                                              .start,
                                                       children: [
                                                         Align(
                                                           alignment:
@@ -943,8 +968,12 @@ class _MisinversionesWidgetState extends State<MisinversionesWidget> {
                                   builder: (context) {
                                     final cdatss = misinversionesCdatsRecordList
                                         .sortedList(
-                                            keyOf: (e) => e.fechaApertura!,
-                                            desc: true)
+                                          keyOf: (e) =>
+                                              e.fechaApertura ??
+                                              DateTime.fromMillisecondsSinceEpoch(
+                                                  0),
+                                          desc: true,
+                                        )
                                         .toList();
 
                                     return SingleChildScrollView(
@@ -1207,7 +1236,12 @@ class _MisinversionesWidgetState extends State<MisinversionesWidget> {
                                                                           valueOrDefault<
                                                                               String>(
                                                                             functions.formatAmount(valueOrDefault<double>(
-                                                                              functions.sumarbeneficioscdatCopys(cdatssItem.fechaApertura!, cdatssItem.ganancias, cdatssItem.tiempo, getCurrentTimestamp),
+                                                                              functions.sumarbeneficioscdatCopys(
+                                                                              cdatssItem.fechaApertura ?? DateTime.fromMillisecondsSinceEpoch(0),
+                                                                              cdatssItem.ganancias,
+                                                                              cdatssItem.tiempo,
+                                                                              getCurrentTimestamp,
+                                                                            ),
                                                                               0.0,
                                                                             )),
                                                                             '\$ 0',
@@ -1608,19 +1642,70 @@ class _MisinversionesWidgetState extends State<MisinversionesWidget> {
                                     ),
                                     20.0,
                                     0.0),
-                                child: Container(
-                                  width: MediaQuery.sizeOf(context).width * 1.0,
-                                  height: 175.0,
-                                  decoration: BoxDecoration(
-                                    color: FlutterFlowTheme.of(context)
-                                        .secondaryBackground,
-                                    image: DecorationImage(
-                                      fit: BoxFit.fill,
-                                      image: Image.network(
-                                        'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/alianza-b7y88v/assets/tl3shshw2p5j/cdat.png',
-                                      ).image,
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(12.0),
+                                  child: SizedBox(
+                                    width: double.infinity,
+                                    height: (MediaQuery.sizeOf(context).height *
+                                            0.26)
+                                        .clamp(200.0, 320.0)
+                                        .toDouble(),
+                                    child: Image.network(
+                                      'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/alianza-b7y88v/assets/tl3shshw2p5j/cdat.png',
+                                      fit: BoxFit.cover,
+                                      alignment: Alignment.center,
+                                      width: double.infinity,
+                                      height: double.infinity,
+                                      errorBuilder:
+                                          (context, error, stackTrace) {
+                                        return Container(
+                                          color: Color(0xFF002CE9),
+                                          alignment: Alignment.center,
+                                          padding: EdgeInsets.all(24.0),
+                                          child: Column(
+                                            mainAxisSize: MainAxisSize.min,
+                                            children: [
+                                              Icon(
+                                                Icons.savings_outlined,
+                                                size: 48.0,
+                                                color: Colors.white
+                                                    .withOpacity(0.9),
+                                              ),
+                                              SizedBox(height: 12.0),
+                                              Text(
+                                                'Aún no tienes CDAT',
+                                                textAlign: TextAlign.center,
+                                                style: FlutterFlowTheme.of(
+                                                        context)
+                                                    .titleMedium
+                                                    .override(
+                                                      fontFamily: 'Satoshi',
+                                                      color: FlutterFlowTheme
+                                                              .of(context)
+                                                          .secondaryBackground,
+                                                      letterSpacing: 0.0,
+                                                    ),
+                                              ),
+                                              SizedBox(height: 6.0),
+                                              Text(
+                                                'Crea uno con + Aperturar CDAT',
+                                                textAlign: TextAlign.center,
+                                                style: FlutterFlowTheme.of(
+                                                        context)
+                                                    .bodySmall
+                                                    .override(
+                                                      fontFamily: 'Satoshi',
+                                                      color: FlutterFlowTheme
+                                                              .of(context)
+                                                          .secondaryBackground
+                                                          .withOpacity(0.85),
+                                                    ),
+                                              ),
+                                            ],
+                                          ),
+                                        );
+                                      },
                                     ),
-                                    borderRadius: BorderRadius.circular(12.0),
                                   ),
                                 ),
                               ),
@@ -1705,8 +1790,23 @@ class _MisinversionesWidgetState extends State<MisinversionesWidget> {
                                       ].divide(SizedBox(height: 8.0)),
                                     ),
                                   ),
-                                  Opacity(
-                                    opacity: 0.5,
+                                  InkWell(
+                                    splashColor: Colors.transparent,
+                                    focusColor: Colors.transparent,
+                                    hoverColor: Colors.transparent,
+                                    highlightColor: Colors.transparent,
+                                    onTap: () async {
+                                      context.pushNamed(
+                                        SimuladorCdatStandaloneWidget.routeName,
+                                        extra: <String, dynamic>{
+                                          '__transition_info__': TransitionInfo(
+                                            hasTransition: true,
+                                            transitionType:
+                                                PageTransitionType.rightToLeft,
+                                          ),
+                                        },
+                                      );
+                                    },
                                     child: Column(
                                       mainAxisSize: MainAxisSize.max,
                                       children: [
@@ -1797,13 +1897,12 @@ class _MisinversionesWidgetState extends State<MisinversionesWidget> {
                                 ))),
                               ),
                             ),
-                            Flexible(
-                              child: Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    20.0, 0.0, 20.0, 0.0),
-                                child: Column(
-                                  mainAxisSize: MainAxisSize.max,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
+                            Padding(
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  20.0, 0.0, 20.0, 0.0),
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Padding(
                                       padding: EdgeInsetsDirectional.fromSTEB(
@@ -1825,9 +1924,7 @@ class _MisinversionesWidgetState extends State<MisinversionesWidget> {
                                         padding: EdgeInsetsDirectional.fromSTEB(
                                             0.0, 0.0, 0.0, 14.0),
                                         child: Container(
-                                          width:
-                                              MediaQuery.sizeOf(context).width *
-                                                  1.0,
+                                          width: double.infinity,
                                           height: valueOrDefault<double>(
                                             MediaQuery.sizeOf(context).height *
                                                 0.08295,
@@ -1983,9 +2080,7 @@ class _MisinversionesWidgetState extends State<MisinversionesWidget> {
                                         padding: EdgeInsetsDirectional.fromSTEB(
                                             0.0, 0.0, 0.0, 14.0),
                                         child: Container(
-                                          width:
-                                              MediaQuery.sizeOf(context).width *
-                                                  1.0,
+                                          width: double.infinity,
                                           height: valueOrDefault<double>(
                                             MediaQuery.sizeOf(context).height *
                                                 0.08295,
@@ -2141,9 +2236,7 @@ class _MisinversionesWidgetState extends State<MisinversionesWidget> {
                                         padding: EdgeInsetsDirectional.fromSTEB(
                                             0.0, 0.0, 0.0, 120.0),
                                         child: Container(
-                                          width:
-                                              MediaQuery.sizeOf(context).width *
-                                                  1.0,
+                                          width: double.infinity,
                                           height: valueOrDefault<double>(
                                             MediaQuery.sizeOf(context).height *
                                                 0.08295,
@@ -2295,13 +2388,13 @@ class _MisinversionesWidgetState extends State<MisinversionesWidget> {
                                     ),
                                   ],
                                 ),
-                              ),
                             ),
                           ],
                         ),
                       ),
                     ),
                   ],
+                ),
                 ),
                 if (responsiveVisibility(
                   context: context,
@@ -2400,6 +2493,7 @@ class _MisinversionesWidgetState extends State<MisinversionesWidget> {
                     ),
                   ),
               ],
+              ),
             ),
           ),
         );

@@ -87,9 +87,11 @@ class _Perfil06CopyAhorrosWidgetState extends State<Perfil06CopyAhorrosWidget> {
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
-        body: Stack(
+        body: custom_widgets.FloatingNavBarScrollScope(
+          child: Stack(
           children: [
-            StreamBuilder<List<AhorrosRecord>>(
+            custom_widgets.FloatingNavBarScrollListener(
+              child: StreamBuilder<List<AhorrosRecord>>(
               stream: queryAhorrosRecord(
                 queryBuilder: (ahorrosRecord) => ahorrosRecord
                     .where(
@@ -796,6 +798,7 @@ class _Perfil06CopyAhorrosWidgetState extends State<Perfil06CopyAhorrosWidget> {
                 );
               },
             ),
+            ),
             Container(
               width: valueOrDefault<double>(
                 MediaQuery.sizeOf(context).width * 1.00,
@@ -885,6 +888,7 @@ class _Perfil06CopyAhorrosWidgetState extends State<Perfil06CopyAhorrosWidget> {
               ),
             ),
           ],
+          ),
         ),
       ),
     );

@@ -50,6 +50,27 @@ class _AhorroTransactionsCopyWidgetState
     super.dispose();
   }
 
+  DateTime? _oldestTransactionDate(List<TransactionsRecord> transactions) {
+    for (var i = transactions.length - 1; i >= 0; i--) {
+      final date = transactions[i].firebaseDate;
+      if (date != null) {
+        return date;
+      }
+    }
+    return null;
+  }
+
+  bool _isTransactionInMonth(
+    TransactionsRecord record,
+    DateTime month,
+  ) {
+    final date = record.firebaseDate;
+    if (date == null) {
+      return false;
+    }
+    return functions.isSameMonthCopy(date, month);
+  }
+
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<List<TransactionsRecord>>(
@@ -199,9 +220,12 @@ class _AhorroTransactionsCopyWidgetState
                                                                   .transactionType ==
                                                               'Depositado'
                                                           ? 'PSE'
-                                                          : listViewTransactionsRecord
-                                                              .withdrawalInfo
-                                                              .bankName,
+                                                          : valueOrDefault<String>(
+                                                              listViewTransactionsRecord
+                                                                  .withdrawalInfo
+                                                                  .bankName,
+                                                              'Débito',
+                                                            ),
                                                       textAlign:
                                                           TextAlign.start,
                                                       style: FlutterFlowTheme
@@ -217,15 +241,18 @@ class _AhorroTransactionsCopyWidgetState
                                                           ),
                                                     ),
                                                     AutoSizeText(
-                                                      '${dateTimeFormat(
-                                                        "d",
-                                                        listViewTransactionsRecord
-                                                            .firebaseDate,
-                                                        locale:
-                                                            FFLocalizations.of(
-                                                                    context)
-                                                                .languageCode,
-                                                      )} ${functions.monthInSpanish(listViewTransactionsRecord.firebaseDate!)}',
+                                                      listViewTransactionsRecord
+                                                                  .firebaseDate !=
+                                                              null
+                                                          ? '${dateTimeFormat(
+                                                              "d",
+                                                              listViewTransactionsRecord
+                                                                  .firebaseDate,
+                                                              locale: FFLocalizations.of(
+                                                                      context)
+                                                                  .languageCode,
+                                                            )} ${functions.monthInSpanish(listViewTransactionsRecord.firebaseDate!)}'
+                                                          : '-',
                                                       textAlign:
                                                           TextAlign.start,
                                                       style: FlutterFlowTheme
@@ -340,15 +367,14 @@ class _AhorroTransactionsCopyWidgetState
                           ),
                           Builder(
                             builder: (context) {
-                              final months = functions
-                                  .monthsTillDate(
-                                      ahorroTransactionsCopyTransactionsRecordList
-                                          .elementAtOrNull(
-                                              ahorroTransactionsCopyTransactionsRecordList
-                                                      .length -
-                                                  1)!
-                                          .firebaseDate!)
-                                  .toList();
+                              final oldestDate = _oldestTransactionDate(
+                                ahorroTransactionsCopyTransactionsRecordList,
+                              );
+                              if (oldestDate == null) {
+                                return const SizedBox.shrink();
+                              }
+                              final months =
+                                  functions.monthsTillDate(oldestDate).toList();
 
                               return ListView.builder(
                                 padding: EdgeInsets.zero,
@@ -397,10 +423,9 @@ class _AhorroTransactionsCopyWidgetState
                                           builder: (context) {
                                             final ahorroTransactionsVar =
                                                 ahorroTransactionsCopyTransactionsRecordList
-                                                    .where((e) => functions
-                                                        .isSameMonthCopy(
-                                                            e.firebaseDate!,
-                                                            monthsItem))
+                                                    .where((e) =>
+                                                        _isTransactionInMonth(
+                                                            e, monthsItem))
                                                     .toList();
 
                                             return ListView.builder(
@@ -443,9 +468,12 @@ class _AhorroTransactionsCopyWidgetState
                                                                               .transactionType ==
                                                                           'Depositado'
                                                                       ? 'PSE'
-                                                                      : ahorroTransactionsVarItem
-                                                                          .withdrawalInfo
-                                                                          .bankName,
+                                                                      : valueOrDefault<String>(
+                                                                          ahorroTransactionsVarItem
+                                                                              .withdrawalInfo
+                                                                              .bankName,
+                                                                          'Débito',
+                                                                        ),
                                                                   textAlign:
                                                                       TextAlign
                                                                           .start,
@@ -464,14 +492,15 @@ class _AhorroTransactionsCopyWidgetState
                                                                       ),
                                                                 ),
                                                                 AutoSizeText(
-                                                                  '${dateTimeFormat(
-                                                                    "d",
-                                                                    ahorroTransactionsVarItem
-                                                                        .firebaseDate,
-                                                                    locale: FFLocalizations.of(
-                                                                            context)
-                                                                        .languageCode,
-                                                                  )} ${functions.monthInSpanish(ahorroTransactionsVarItem.firebaseDate!)}',
+                                                                  ahorroTransactionsVarItem.firebaseDate !=
+                                                                          null
+                                                                      ? '${dateTimeFormat(
+                                                                          "d",
+                                                                          ahorroTransactionsVarItem
+                                                                              .firebaseDate,
+                                                                          locale: FFLocalizations.of(context).languageCode,
+                                                                        )} ${functions.monthInSpanish(ahorroTransactionsVarItem.firebaseDate!)}'
+                                                                      : '-',
                                                                   textAlign:
                                                                       TextAlign
                                                                           .start,

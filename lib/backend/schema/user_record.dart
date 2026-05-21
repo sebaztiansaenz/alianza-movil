@@ -382,6 +382,16 @@ class UserRecord extends FirestoreRecord {
   int get montoPreAprobado => _montoPreAprobado ?? 0;
   bool hasMontoPreAprobado() => _montoPreAprobado != null;
 
+  // "cuotaMensual" field.
+  int? _cuotaMensual;
+  int get cuotaMensual => _cuotaMensual ?? 0;
+  bool hasCuotaMensual() => _cuotaMensual != null;
+
+  // "plazoAprobadoMeses" field.
+  int? _plazoAprobadoMeses;
+  int get plazoAprobadoMeses => _plazoAprobadoMeses ?? 0;
+  bool hasPlazoAprobadoMeses() => _plazoAprobadoMeses != null;
+
   // "respuestaCredito" field.
   bool? _respuestaCredito;
   bool get respuestaCredito => _respuestaCredito ?? false;
@@ -391,6 +401,23 @@ class UserRecord extends FirestoreRecord {
   bool? _perfilCredito;
   bool get perfilCredito => _perfilCredito ?? false;
   bool hasPerfilCredito() => _perfilCredito != null;
+
+  // "estadoOfertaCredito" field.
+  String? _estadoOfertaCredito;
+  String get estadoOfertaCredito => _estadoOfertaCredito ?? '';
+  bool hasEstadoOfertaCredito() => _estadoOfertaCredito != null;
+
+  // "creditoDocPagareUrl" field.
+  String? _creditoDocPagareUrl;
+  String get creditoDocPagareUrl => _creditoDocPagareUrl ?? '';
+  bool hasCreditoDocPagareUrl() => _creditoDocPagareUrl != null;
+
+  // "creditoDocAutorizacionNominaUrl" field.
+  String? _creditoDocAutorizacionNominaUrl;
+  String get creditoDocAutorizacionNominaUrl =>
+      _creditoDocAutorizacionNominaUrl ?? '';
+  bool hasCreditoDocAutorizacionNominaUrl() =>
+      _creditoDocAutorizacionNominaUrl != null;
 
   void _initializeFields() {
     _email = snapshotData['email'] as String?;
@@ -467,8 +494,14 @@ class UserRecord extends FirestoreRecord {
         snapshotData['empresanuevaahorro'] as DocumentReference?;
     _habilitar = snapshotData['habilitar'] as bool?;
     _montoPreAprobado = castToType<int>(snapshotData['montoPreAprobado']);
+    _cuotaMensual = castToType<int>(snapshotData['cuotaMensual']);
+    _plazoAprobadoMeses = castToType<int>(snapshotData['plazoAprobadoMeses']);
     _respuestaCredito = snapshotData['respuestaCredito'] as bool?;
     _perfilCredito = snapshotData['perfilCredito'] as bool?;
+    _estadoOfertaCredito = snapshotData['estadoOfertaCredito'] as String?;
+    _creditoDocPagareUrl = snapshotData['creditoDocPagareUrl'] as String?;
+    _creditoDocAutorizacionNominaUrl =
+        snapshotData['creditoDocAutorizacionNominaUrl'] as String?;
   }
 
   static CollectionReference get collection =>
@@ -577,8 +610,13 @@ Map<String, dynamic> createUserRecordData({
   DocumentReference? empresanuevaahorro,
   bool? habilitar,
   int? montoPreAprobado,
+  int? cuotaMensual,
+  int? plazoAprobadoMeses,
   bool? respuestaCredito,
   bool? perfilCredito,
+  String? estadoOfertaCredito,
+  String? creditoDocPagareUrl,
+  String? creditoDocAutorizacionNominaUrl,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -654,8 +692,13 @@ Map<String, dynamic> createUserRecordData({
       'empresanuevaahorro': empresanuevaahorro,
       'habilitar': habilitar,
       'montoPreAprobado': montoPreAprobado,
+      'cuotaMensual': cuotaMensual,
+      'plazoAprobadoMeses': plazoAprobadoMeses,
       'respuestaCredito': respuestaCredito,
       'perfilCredito': perfilCredito,
+      'estadoOfertaCredito': estadoOfertaCredito,
+      'creditoDocPagareUrl': creditoDocPagareUrl,
+      'creditoDocAutorizacionNominaUrl': creditoDocAutorizacionNominaUrl,
     }.withoutNulls,
   );
 
@@ -741,8 +784,14 @@ class UserRecordDocumentEquality implements Equality<UserRecord> {
         e1?.empresanuevaahorro == e2?.empresanuevaahorro &&
         e1?.habilitar == e2?.habilitar &&
         e1?.montoPreAprobado == e2?.montoPreAprobado &&
+        e1?.cuotaMensual == e2?.cuotaMensual &&
+        e1?.plazoAprobadoMeses == e2?.plazoAprobadoMeses &&
         e1?.respuestaCredito == e2?.respuestaCredito &&
-        e1?.perfilCredito == e2?.perfilCredito;
+        e1?.perfilCredito == e2?.perfilCredito &&
+        e1?.estadoOfertaCredito == e2?.estadoOfertaCredito &&
+        e1?.creditoDocPagareUrl == e2?.creditoDocPagareUrl &&
+        e1?.creditoDocAutorizacionNominaUrl ==
+            e2?.creditoDocAutorizacionNominaUrl;
   }
 
   @override
@@ -820,8 +869,13 @@ class UserRecordDocumentEquality implements Equality<UserRecord> {
         e?.empresanuevaahorro,
         e?.habilitar,
         e?.montoPreAprobado,
+        e?.cuotaMensual,
+        e?.plazoAprobadoMeses,
         e?.respuestaCredito,
-        e?.perfilCredito
+        e?.perfilCredito,
+        e?.estadoOfertaCredito,
+        e?.creditoDocPagareUrl,
+        e?.creditoDocAutorizacionNominaUrl,
       ]);
 
   @override

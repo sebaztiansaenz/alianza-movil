@@ -1,6 +1,7 @@
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/flutter_flow/session_inactivity.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/pages/sucess_mensaje_error/sucess_mensaje_error_widget.dart';
 import 'dart:ui';
@@ -60,7 +61,7 @@ class Solicitarcrdito7Widget extends StatefulWidget {
   State<Solicitarcrdito7Widget> createState() => _Solicitarcrdito7WidgetState();
 }
 
-class _Solicitarcrdito7WidgetState extends State<Solicitarcrdito7Widget> {
+class _Solicitarcrdito7WidgetState extends State<Solicitarcrdito7Widget> with SessionActivityOnInitMixin {
   late Solicitarcrdito7Model _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();

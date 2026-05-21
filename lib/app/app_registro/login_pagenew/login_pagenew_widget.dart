@@ -693,7 +693,8 @@ class _LoginPagenewWidgetState extends State<LoginPagenewWidget> {
                                                   ),
                                                 );
                                                 _shouldSetState = true;
-                                                await showDialog(
+                                                final openedCdatFlow =
+                                                    await showDialog<bool>(
                                                   context: context,
                                                   builder: (dialogContext) {
                                                     return Dialog(
@@ -723,6 +724,26 @@ class _LoginPagenewWidgetState extends State<LoginPagenewWidget> {
                                                     );
                                                   },
                                                 );
+
+                                                if (openedCdatFlow != true &&
+                                                    context.mounted) {
+                                                  context.goNamedAuth(
+                                                    AHORROSPage1CopyCopyWidget
+                                                        .routeName,
+                                                    context.mounted,
+                                                    extra: <String, dynamic>{
+                                                      '__transition_info__':
+                                                          TransitionInfo(
+                                                        hasTransition: true,
+                                                        transitionType:
+                                                            PageTransitionType
+                                                                .bottomToTop,
+                                                        duration: Duration(
+                                                            milliseconds: 300),
+                                                      ),
+                                                    },
+                                                  );
+                                                }
 
                                                 if (_shouldSetState)
                                                   safeSetState(() {});

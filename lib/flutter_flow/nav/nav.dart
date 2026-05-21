@@ -15,6 +15,8 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/lat_lng.dart';
 import '/flutter_flow/place.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/flutter_flow/adaptive_page_shell.dart';
+import '/flutter_flow/session_inactivity.dart';
 import 'serialization_util.dart';
 
 import '/index.dart';
@@ -84,9 +86,11 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
       debugLogDiagnostics: true,
       refreshListenable: appStateNotifier,
       navigatorKey: appNavigatorKey,
-      errorBuilder: (context, state) => appStateNotifier.loggedIn
-          ? SplashWidget()
-          : OnboardingAppMovilWidget(),
+      errorBuilder: (context, state) => AdaptivePageShell(
+            child: appStateNotifier.loggedIn
+                ? SplashWidget()
+                : OnboardingAppMovilWidget(),
+          ),
       routes: [
         FFRoute(
           name: '_initialize',
@@ -399,6 +403,11 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               ParamType.String,
             ),
           ),
+        ),
+        FFRoute(
+          name: CreditoIntermissionZapsignWidget.routeName,
+          path: CreditoIntermissionZapsignWidget.routePath,
+          builder: (context, params) => const CreditoIntermissionZapsignWidget(),
         ),
         FFRoute(
           name: AhorroDepositarWidget.routeName,
@@ -1392,6 +1401,11 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               ParamType.Document,
             ),
           ),
+        ),
+        FFRoute(
+          name: SimuladorCdatStandaloneWidget.routeName,
+          path: SimuladorCdatStandaloneWidget.routePath,
+          builder: (context, params) => SimuladorCdatStandaloneWidget(),
         ),
         FFRoute(
           name: VERMAScdatWidget.routeName,
@@ -2434,7 +2448,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           ),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
-      observers: [routeObserver],
+      observers: [routeObserver, sessionActivityNavigatorObserver],
     );
 
 extension NavParamExtensions on Map<String, String?> {
@@ -2612,12 +2626,16 @@ class FFRoute {
         pageBuilder: (context, state) {
           fixStatusBarOniOS16AndBelow(context);
           final ffParams = FFParameters(state, asyncParams);
-          final page = ffParams.hasFutures
+          final builtPage = ffParams.hasFutures
               ? FutureBuilder(
                   future: ffParams.completeFutures(),
                   builder: (context, _) => builder(context, ffParams),
                 )
               : builder(context, ffParams);
+          final page = AdaptivePageShell(
+            routeName: name,
+            child: builtPage,
+          );
           final child = appStateNotifier.loading
               ? Container(
                   color: Color(0xFF0B35B8),

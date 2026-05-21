@@ -73,9 +73,11 @@ class _Perfil03WidgetState extends State<Perfil03Widget> {
 
     return Scaffold(
       key: scaffoldKey,
-      body: Stack(
+      body: custom_widgets.FloatingNavBarScrollScope(
+        child: Stack(
         children: [
-          Padding(
+          custom_widgets.FloatingNavBarScrollListener(
+            child: Padding(
             padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 40.0),
             child: Column(
               mainAxisSize: MainAxisSize.max,
@@ -502,6 +504,7 @@ class _Perfil03WidgetState extends State<Perfil03Widget> {
               ],
             ),
           ),
+          ),
           Container(
             width: valueOrDefault<double>(
               MediaQuery.sizeOf(context).width * 1.00,
@@ -591,6 +594,7 @@ class _Perfil03WidgetState extends State<Perfil03Widget> {
             ),
           ),
         ],
+        ),
       ),
     );
   }

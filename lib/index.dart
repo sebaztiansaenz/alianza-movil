@@ -58,6 +58,8 @@ export '/app/otros/app_eliminar/transactions_details/transactions_details_widget
     show TransactionsDetailsWidget;
 export '/app/otros/intermission_zapsign/intermission_zapsign_widget.dart'
     show IntermissionZapsignWidget;
+export '/credito/credito_intermission_zapsign/credito_intermission_zapsign_widget.dart'
+    show CreditoIntermissionZapsignWidget;
 export '/app/ahorros_pages/ahorro_depositar/ahorro_depositar_widget.dart'
     show AhorroDepositarWidget;
 export '/app/otros/app_eliminar/ahorro_transactions/ahorro_transactions_widget.dart'
@@ -193,6 +195,8 @@ export '/app/ahorros_pages/modal_copy_copy2/modal_copy_copy2_widget.dart'
     show ModalCopyCopy2Widget;
 export '/app/appcdat/home_inversiones/home_inversiones_widget.dart'
     show HomeInversionesWidget;
+export '/app/appcdat/simulador_cdat_standalone/simulador_cdat_standalone_widget.dart'
+    show SimuladorCdatStandaloneWidget;
 export '/app/appcdat/misinversiones/misinversiones_widget.dart'
     show MisinversionesWidget;
 export '/app/appcdat/v_e_r_m_a_scdat/v_e_r_m_a_scdat_widget.dart'

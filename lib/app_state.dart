@@ -628,6 +628,19 @@ class FFAppState extends ChangeNotifier {
     _zapsignToken = value;
   }
 
+  /// `documentos` | `pagare` | `autorizacion` | vacío — flujo firma crédito ZapSign.
+  String _creditoZapsignFase = '';
+  String get creditoZapsignFase => _creditoZapsignFase;
+  set creditoZapsignFase(String value) {
+    _creditoZapsignFase = value;
+  }
+
+  bool _creditoOpenProcesoDisbursement = false;
+  bool get creditoOpenProcesoDisbursement => _creditoOpenProcesoDisbursement;
+  set creditoOpenProcesoDisbursement(bool value) {
+    _creditoOpenProcesoDisbursement = value;
+  }
+
   double _amount = 0.0;
   double get amount => _amount;
   set amount(double value) {

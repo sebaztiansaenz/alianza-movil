@@ -1,10 +1,9 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/flutter_flow/session_inactivity.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import '/flutter_flow/instant_timer.dart';
 import 'dart:ui';
-import '/flutter_flow/custom_functions.dart' as functions;
 import '/index.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -25,7 +24,7 @@ class MensajedeconfirmacinWidget extends StatefulWidget {
 }
 
 class _MensajedeconfirmacinWidgetState
-    extends State<MensajedeconfirmacinWidget> {
+    extends State<MensajedeconfirmacinWidget> with SessionActivityOnInitMixin {
   late MensajedeconfirmacinModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
@@ -57,24 +56,8 @@ class _MensajedeconfirmacinWidgetState
           );
         }),
         Future(() async {
-          FFAppState().lastAction = getCurrentTimestamp;
+          registerSessionActivity();
           safeSetState(() {});
-          _model.instantTimer = InstantTimer.periodic(
-            duration: Duration(milliseconds: 10000),
-            callback: (timer) async {
-              if (functions.past5Mins(FFAppState().lastAction!)) {
-                GoRouter.of(context).prepareAuthEvent();
-                await authManager.signOut();
-                GoRouter.of(context).clearRedirectLocation();
-
-                context.goNamedAuth(
-                    CierredeSesionWidget.routeName, context.mounted);
-
-                _model.instantTimer?.cancel();
-              }
-            },
-            startImmediately: false,
-          );
         }),
       ]);
     });

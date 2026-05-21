@@ -70,9 +70,11 @@ class _AhorroDeNominaPageWidgetState extends State<AhorroDeNominaPageWidget> {
       },
       child: Scaffold(
         key: scaffoldKey,
-        body: Stack(
+        body: custom_widgets.FloatingNavBarScrollScope(
+          child: Stack(
           children: [
-            Column(
+            custom_widgets.FloatingNavBarScrollListener(
+              child: Column(
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
@@ -436,6 +438,7 @@ class _AhorroDeNominaPageWidgetState extends State<AhorroDeNominaPageWidget> {
                 ),
               ],
             ),
+            ),
             Container(
               width: valueOrDefault<double>(
                 MediaQuery.sizeOf(context).width * 1.00,
@@ -525,6 +528,7 @@ class _AhorroDeNominaPageWidgetState extends State<AhorroDeNominaPageWidget> {
               ),
             ),
           ],
+          ),
         ),
       ),
     );

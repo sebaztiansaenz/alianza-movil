@@ -702,6 +702,8 @@ class InitiateSignatureCopyCall {
     String? email = '',
     String? phone = '',
     String? redirectURL = 'alianza://alianza.com/intermissionZapsign',
+    /// Nombre del doc en ZapSign; el webhook usa este valor (`ahorro1.pdf`, `credito_pagare.pdf`, …).
+    String? pdfName = 'ahorro1.pdf',
   }) async {
     final response = await makeCloudCall(
       _kPrivateApiFunctionName,
@@ -714,6 +716,7 @@ class InitiateSignatureCopyCall {
           'email': email,
           'phone': phone,
           'redirectURL': redirectURL,
+          'pdfName': pdfName,
         },
       },
     );
@@ -1107,6 +1110,66 @@ class PlaceSignatureInNominaPDFCopyCall {
         r'''$.extra_docs[:].signed_file''',
         true,
       ) as List?;
+}
+
+/// Recuadro de firma — pagaré crédito (páginas 0 y 1, pie del documento).
+class PlaceSignatureInCreditoPagareCall {
+  static Future<ApiCallResponse> call({
+    String? token = '',
+    String? signerToken = '',
+  }) async {
+    final response = await makeCloudCall(
+      _kPrivateApiFunctionName,
+      {
+        'callName': 'PlaceSignatureInCreditoPagareCall',
+        'variables': {
+          'token': token,
+          'signerToken': signerToken,
+        },
+      },
+    );
+    return ApiCallResponse.fromCloudCallResponse(response);
+  }
+}
+
+/// Pagaré (págs. 0-1) + autorización (pág. 2) en un solo PDF.
+class PlaceSignatureInCreditoDocumentosCall {
+  static Future<ApiCallResponse> call({
+    String? token = '',
+    String? signerToken = '',
+  }) async {
+    final response = await makeCloudCall(
+      _kPrivateApiFunctionName,
+      {
+        'callName': 'PlaceSignatureInCreditoDocumentosCall',
+        'variables': {
+          'token': token,
+          'signerToken': signerToken,
+        },
+      },
+    );
+    return ApiCallResponse.fromCloudCallResponse(response);
+  }
+}
+
+/// Recuadro de firma — autorización descuentos nómina (página 0).
+class PlaceSignatureInCreditoAutorizacionCall {
+  static Future<ApiCallResponse> call({
+    String? token = '',
+    String? signerToken = '',
+  }) async {
+    final response = await makeCloudCall(
+      _kPrivateApiFunctionName,
+      {
+        'callName': 'PlaceSignatureInCreditoAutorizacionCall',
+        'variables': {
+          'token': token,
+          'signerToken': signerToken,
+        },
+      },
+    );
+    return ApiCallResponse.fromCloudCallResponse(response);
+  }
 }
 
 class PlaceSignatureInAhorroPDFsCall {

@@ -20,6 +20,7 @@ import '../main.dart';
 
 import 'lat_lng.dart';
 
+export 'adaptive_page_shell.dart';
 export 'lat_lng.dart';
 export 'place.dart';
 export 'uploaded_file.dart';

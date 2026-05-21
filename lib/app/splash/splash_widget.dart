@@ -73,7 +73,7 @@ class _SplashWidgetState extends State<SplashWidget> {
             },
           );
         } else {
-          await showDialog(
+          final openedCdatFlow = await showDialog<bool>(
             context: context,
             builder: (dialogContext) {
               return Dialog(
@@ -92,6 +92,18 @@ class _SplashWidgetState extends State<SplashWidget> {
               );
             },
           );
+          if (openedCdatFlow != true && context.mounted) {
+            context.goNamed(
+              AHORROSPage1CopyCopyWidget.routeName,
+              extra: <String, dynamic>{
+                '__transition_info__': TransitionInfo(
+                  hasTransition: true,
+                  transitionType: PageTransitionType.bottomToTop,
+                  duration: Duration(milliseconds: 300),
+                ),
+              },
+            );
+          }
         }
       }
     });
