@@ -265,10 +265,8 @@ class _Retiro2newWidgetState extends State<Retiro2newWidget>
                                   child: Container(
                                     width:
                                         MediaQuery.sizeOf(context).width * 1.0,
-                                    height: valueOrDefault<double>(
-                                      MediaQuery.sizeOf(context).height *
-                                          0.11848,
-                                      100.0,
+                                    constraints: const BoxConstraints(
+                                      minHeight: 112.0,
                                     ),
                                     decoration: BoxDecoration(
                                       color: FlutterFlowTheme.of(context)
@@ -438,17 +436,15 @@ class _Retiro2newWidgetState extends State<Retiro2newWidget>
                                                                     child:
                                                                         Container(
                                                                       width:
-                                                                          100.0,
+                                                                          8.0,
                                                                       height:
-                                                                          100.0,
+                                                                          8.0,
                                                                       decoration:
                                                                           BoxDecoration(
                                                                         color: FlutterFlowTheme.of(context)
                                                                             .customColor4,
                                                                         borderRadius:
                                                                             BorderRadius.circular(24.0),
-                                                                        shape: BoxShape
-                                                                            .rectangle,
                                                                       ),
                                                                     ),
                                                                   ),

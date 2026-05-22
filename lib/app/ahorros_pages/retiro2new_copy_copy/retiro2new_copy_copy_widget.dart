@@ -207,9 +207,8 @@ class _Retiro2newCopyCopyWidgetState extends State<Retiro2newCopyCopyWidget>
                           opacity: 0.5,
                           child: Container(
                             width: MediaQuery.sizeOf(context).width * 1.0,
-                            height: valueOrDefault<double>(
-                              MediaQuery.sizeOf(context).height * 0.11848,
-                              100.0,
+                            constraints: const BoxConstraints(
+                              minHeight: 112.0,
                             ),
                             decoration: BoxDecoration(
                               color: FlutterFlowTheme.of(context)

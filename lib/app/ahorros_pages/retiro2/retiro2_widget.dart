@@ -22,6 +22,7 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import '/custom_code/widgets/ahorro_cuenta_card.dart';
 import 'retiro2_model.dart';
 export 'retiro2_model.dart';
 
@@ -258,265 +259,118 @@ class _Retiro2WidgetState extends State<Retiro2Widget>
                                     Padding(
                                       padding: EdgeInsetsDirectional.fromSTEB(
                                           0.0, 0.0, 20.0, 0.0),
-                                      child: Container(
-                                        width: double.infinity,
-                                        height: 98.0,
-                                        decoration: BoxDecoration(
-                                          color: FlutterFlowTheme.of(context)
-                                              .secondaryBackground,
-                                          boxShadow: [
-                                            BoxShadow(
-                                              blurRadius: 4.0,
-                                              color: Color(0x19262632),
-                                              offset: Offset(
-                                                0.0,
-                                                2.0,
-                                              ),
-                                            )
-                                          ],
-                                          borderRadius:
-                                              BorderRadius.circular(12.0),
-                                          border: Border.all(
-                                            color: Color(0xFFFF6700),
-                                            width: 1.0,
-                                          ),
+                                      child: AhorroCuentaCard(
+                                        backgroundColor:
+                                            FlutterFlowTheme.of(context)
+                                                .secondaryBackground,
+                                        savingsType: valueOrDefault<String>(
+                                          retiro2AhorrosRecord.savingsType,
+                                          '- - -',
                                         ),
-                                        child: Align(
-                                          alignment:
-                                              AlignmentDirectional(0.0, 0.0),
-                                          child: Column(
-                                            mainAxisSize: MainAxisSize.max,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.end,
-                                            children: [
-                                              Padding(
-                                                padding:
-                                                    EdgeInsetsDirectional
-                                                        .fromSTEB(
-                                                            16.0, 0.0, 16.0, 0.0),
-                                                child: Row(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  children: [
-                                                    Expanded(
-                                                      child: Padding(
-                                                        padding:
-                                                            EdgeInsetsDirectional
-                                                                .fromSTEB(
-                                                                    0.0,
-                                                                    16.0,
-                                                                    8.0,
-                                                                    0.0),
-                                                        child: Column(
-                                                          mainAxisSize:
-                                                              MainAxisSize.min,
-                                                          crossAxisAlignment:
-                                                              CrossAxisAlignment
-                                                                  .start,
-                                                          children: [
-                                                            Row(
-                                                              children: [
-                                                                Padding(
-                                                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                                                      0.0,
-                                                                      0.0,
-                                                                      8.0,
-                                                                      0.0),
-                                                                  child:
-                                                                      Image.asset(
-                                                                    'assets/images/Group_3.png',
-                                                                    width: 14.0,
-                                                                    height: 20.0,
-                                                                    fit: BoxFit
-                                                                        .cover,
-                                                                  ),
-                                                                ),
-                                                                Expanded(
-                                                                  child: Text(
-                                                                    valueOrDefault<
-                                                                        String>(
-                                                                      retiro2AhorrosRecord
-                                                                          .savingsType,
-                                                                      '- - -',
-                                                                    ),
-                                                                    maxLines: 2,
-                                                                    overflow:
-                                                                        TextOverflow
-                                                                            .ellipsis,
-                                                                    style: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .bodyMedium
-                                                                        .override(
-                                                                          fontFamily:
-                                                                              'Satoshi',
-                                                                          color: Color(
-                                                                              0xFF002CE9),
-                                                                          letterSpacing:
-                                                                              0.0,
-                                                                          fontWeight:
-                                                                              FontWeight.bold,
-                                                                        ),
-                                                                  ),
-                                                                ),
-                                                              ],
-                                                            ),
-                                                            AuthUserStreamWidget(
-                                                              builder: (context) =>
-                                                                  Text(
-                                                                valueOrDefault<
-                                                                    String>(
-                                                                  '# ${valueOrDefault(currentUserDocument?.nit, '')}-0${widget!.numero?.toString()}',
-                                                                  '0',
-                                                                ),
-                                                                style: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .bodyMedium
-                                                                    .override(
-                                                                      fontFamily:
-                                                                          'Satoshi',
-                                                                      color: Color(
-                                                                          0xB3262632),
-                                                                      fontSize:
-                                                                          12.0,
-                                                                      letterSpacing:
-                                                                          0.0,
-                                                                    ),
-                                                              ),
-                                                            ),
-                                                          ],
-                                                        ),
-                                                      ),
-                                                    ),
-                                                    Padding(
-                                                      padding:
-                                                          EdgeInsetsDirectional
-                                                              .fromSTEB(
-                                                                  0.0,
-                                                                  16.0,
-                                                                  0.0,
-                                                                  0.0),
-                                                      child: Image.asset(
-                                                        'assets/images/Frame_2085662540_(5).png',
-                                                        width: 54.0,
-                                                        height: 22.0,
-                                                        fit: BoxFit.contain,
-                                                      ),
-                                                    ),
-                                                  ],
+                                        accountLine: AuthUserStreamWidget(
+                                          builder: (context) => Text(
+                                            valueOrDefault<String>(
+                                              '# ${valueOrDefault(currentUserDocument?.nit, '')}-0${widget!.numero?.toString()}',
+                                              '0',
+                                            ),
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyMedium
+                                                .override(
+                                                  fontFamily: 'Satoshi',
+                                                  color: const Color(0xB3262632),
+                                                  fontSize: 12.0,
+                                                  letterSpacing: 0.0,
                                                 ),
-                                              ),
-                                              Row(
-                                                mainAxisSize: MainAxisSize.max,
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.end,
-                                                children: [
-                                                  if (_model.transactionsTotal
-                                                          ?.where((e) =>
-                                                              e.ahorroid ==
-                                                              retiro2AhorrosRecord
-                                                                  .reference.id)
-                                                          .toList()
-                                                          ?.firstOrNull
-                                                          ?.total !=
-                                                      null)
-                                                    Expanded(
-                                                      child: Padding(
-                                                        padding:
-                                                            EdgeInsetsDirectional
-                                                                .fromSTEB(
-                                                                    0.0,
-                                                                    0.0,
-                                                                    14.0,
-                                                                    0.0),
-                                                        child: Align(
-                                                          alignment:
-                                                              AlignmentDirectional
-                                                                  .centerEnd,
-                                                          child: FittedBox(
-                                                            fit: BoxFit.scaleDown,
-                                                            alignment: Alignment
-                                                                .centerRight,
-                                                            child: Text(
-                                                              valueOrDefault<
-                                                                  String>(
-                                                                functions.formatAmount(
-                                                                    valueOrDefault<
-                                                                        double>(
-                                                                      valueOrDefault<
-                                                                              double>(
-                                                                            valueOrDefault<
-                                                                                    double>(
-                                                                                  _model.totalesAhorro.where((e) => e.ahorroid == valueOrDefault<String>(retiro2AhorrosRecord.reference.id, '0')).toList().firstOrNull?.total,
-                                                                                  0.0,
-                                                                                ) -
-                                                                                valueOrDefault<double>(
-                                                                                  _model.retirosAhorro.where((e) => e.ahorroid == valueOrDefault<String>(retiro2AhorrosRecord.reference.id, '0')).toList().firstOrNull?.total,
-                                                                                  0.0,
-                                                                                ),
-                                                                            0.0,
-                                                                          ) +
-                                                                          valueOrDefault<
-                                                                              double>(
-                                                                            functions.sumaTotal(retiro2AhorrosRecord.transactions.map((e) => valueOrDefault<double>(e.taxedBenefit, 0.0)).toList()),
-                                                                            0.0,
-                                                                          ),
-                                                                      0.0,
-                                                                    )),
-                                                                '\$0',
-                                                              ),
-                                                              style: FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .bodyMedium
-                                                                  .override(
-                                                                    fontFamily:
-                                                                        'Satoshi',
-                                                                    color: Color(
-                                                                        0xFF002CE9),
-                                                                    fontSize:
-                                                                        24.0,
-                                                                    letterSpacing:
-                                                                        0.0,
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w900,
-                                                                  ),
-                                                            ),
-                                                          ),
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  if (_model.transactionsTotal
-                                                          ?.where((e) =>
-                                                              e.ahorroid ==
-                                                              retiro2AhorrosRecord
-                                                                  .reference.id)
-                                                          .toList()
-                                                          ?.firstOrNull
-                                                          ?.total ==
-                                                      null)
-                                                    Padding(
-                                                      padding:
-                                                          EdgeInsetsDirectional
-                                                              .fromSTEB(
-                                                                  0.0,
-                                                                  0.0,
-                                                                  14.0,
-                                                                  0.0),
-                                                      child: FaIcon(
-                                                        FontAwesomeIcons
-                                                            .circleNotch,
-                                                        color:
-                                                            Color(0xFF002CE9),
-                                                        size: 24.0,
-                                                      ).animateOnPageLoad(
-                                                          animationsMap[
-                                                              'iconOnPageLoadAnimation']!),
-                                                    ),
-                                                ],
-                                              ),
-                                            ],
                                           ),
                                         ),
+                                        balanceChild: _model.transactionsTotal
+                                                    ?.where((e) =>
+                                                        e.ahorroid ==
+                                                        retiro2AhorrosRecord
+                                                            .reference.id)
+                                                    .toList()
+                                                    .firstOrNull
+                                                    ?.total !=
+                                                null
+                                            ? Padding(
+                                                padding:
+                                                    const EdgeInsetsDirectional
+                                                        .fromSTEB(
+                                                    0.0, 0.0, 6.0, 0.0),
+                                                child: FittedBox(
+                                                  fit: BoxFit.scaleDown,
+                                                  alignment:
+                                                      Alignment.centerRight,
+                                                  child: Text(
+                                                    valueOrDefault<String>(
+                                                      functions.formatAmount(
+                                                          valueOrDefault<double>(
+                                                        valueOrDefault<double>(
+                                                              valueOrDefault<double>(
+                                                                _model.totalesAhorro
+                                                                    .where((e) =>
+                                                                        e.ahorroid ==
+                                                                        valueOrDefault<String>(
+                                                                          retiro2AhorrosRecord.reference.id,
+                                                                          '0',
+                                                                        ))
+                                                                    .toList()
+                                                                    .firstOrNull
+                                                                    ?.total,
+                                                                0.0,
+                                                              ) -
+                                                              valueOrDefault<double>(
+                                                                _model.retirosAhorro
+                                                                    .where((e) =>
+                                                                        e.ahorroid ==
+                                                                        valueOrDefault<String>(
+                                                                          retiro2AhorrosRecord.reference.id,
+                                                                          '0',
+                                                                        ))
+                                                                    .toList()
+                                                                    .firstOrNull
+                                                                    ?.total,
+                                                                0.0,
+                                                              ),
+                                                          0.0,
+                                                        ) +
+                                                            valueOrDefault<double>(
+                                                              functions.sumaTotal(
+                                                                  retiro2AhorrosRecord
+                                                                      .transactions
+                                                                      .map((e) =>
+                                                                          valueOrDefault<double>(
+                                                                            e.taxedBenefit,
+                                                                            0.0,
+                                                                          ))
+                                                                      .toList()),
+                                                              0.0,
+                                                            ),
+                                                        0.0,
+                                                      )),
+                                                      '\$0',
+                                                    ),
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
+                                                        .bodyMedium
+                                                        .override(
+                                                          fontFamily: 'Satoshi',
+                                                          color: const Color(
+                                                              0xFF002CE9),
+                                                          fontSize: 24.0,
+                                                          letterSpacing: 0.0,
+                                                          fontWeight:
+                                                              FontWeight.w900,
+                                                        ),
+                                                  ),
+                                                ),
+                                              )
+                                            : FaIcon(
+                                                FontAwesomeIcons.circleNotch,
+                                                color: const Color(0xFF002CE9),
+                                                size: 24.0,
+                                              ).animateOnPageLoad(animationsMap[
+                                                  'iconOnPageLoadAnimation']!),
                                       ),
                                     ),
                                   ],

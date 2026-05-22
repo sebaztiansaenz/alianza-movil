@@ -204,12 +204,33 @@ Theme wrapInMaterialTimePickerTheme(
   );
 }
 
+/// Abre enlaces externos (ZapSign, etc.). En Android 11+ no usar solo
+/// [canLaunchUrl]: puede devolver false aunque el navegador exista.
+Future<void> openExternalSignUrl(String url) async {
+  final uri = Uri.parse(url);
+  if (kIsWeb) {
+    final ok = await launchUrl(uri, webOnlyWindowName: '_blank');
+    if (!ok) {
+      throw Exception('No se pudo abrir el enlace en el navegador');
+    }
+    return;
+  }
+  if (await launchUrl(uri, mode: LaunchMode.externalApplication)) {
+    return;
+  }
+  if (await launchUrl(uri, mode: LaunchMode.inAppBrowserView)) {
+    return;
+  }
+  throw Exception(
+    'No se puede abrir el enlace de firma. Comprueba que tengas un navegador instalado.',
+  );
+}
+
 Future launchURL(String url) async {
-  var uri = Uri.parse(url);
   try {
-    await launchUrl(uri);
+    await openExternalSignUrl(url);
   } catch (e) {
-    throw 'Could not launch $uri: $e';
+    throw 'Could not launch $url: $e';
   }
 }
 
