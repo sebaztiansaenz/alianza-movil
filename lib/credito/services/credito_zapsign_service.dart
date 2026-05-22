@@ -2,9 +2,6 @@ import 'dart:convert';
 import 'dart:typed_data';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/foundation.dart';
-import 'package:url_launcher/url_launcher.dart';
-
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/api_requests/api_calls.dart';
 import '/credito/services/credito_documentos_cache.dart';
@@ -54,15 +51,7 @@ class CreditoZapsignService {
   }
 
   static Future<void> _openSignUrl(String url) async {
-    final uri = Uri.parse(url);
-    if (!await canLaunchUrl(uri)) {
-      throw Exception('No se puede abrir ZapSign');
-    }
-    if (kIsWeb) {
-      await launchUrl(uri, webOnlyWindowName: '_blank');
-    } else {
-      await launchUrl(uri, mode: LaunchMode.externalApplication);
-    }
+    await openExternalSignUrl(url);
   }
 
   static Future<void> _enviarPdf({

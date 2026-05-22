@@ -21,7 +21,6 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'package:url_launcher/url_launcher.dart';
 import 'ahorro_d_o_c_u_m_e_n_t_oapage_model.dart';
 export 'ahorro_d_o_c_u_m_e_n_t_oapage_model.dart';
 
@@ -225,16 +224,7 @@ class _AhorroDOCUMENTOapageWidgetState extends State<AhorroDOCUMENTOapageWidget>
   }
 
   Future<void> _openZapsignSignUrl(String url) async {
-    final uri = Uri.parse(url);
-    final canOpen = await canLaunchUrl(uri);
-    if (!canOpen) {
-      throw Exception('No se puede abrir la URL de Zapsign');
-    }
-    if (kIsWeb) {
-      await launchUrl(uri, webOnlyWindowName: '_blank');
-    } else {
-      await launchUrl(uri, mode: LaunchMode.externalApplication);
-    }
+    await openExternalSignUrl(url);
   }
 
   Future<void> _handleFirmar() async {

@@ -264,10 +264,8 @@ class _Retiro2newCopyWidgetState extends State<Retiro2newCopyWidget>
                                         width:
                                             MediaQuery.sizeOf(context).width *
                                                 1.0,
-                                        height: valueOrDefault<double>(
-                                          MediaQuery.sizeOf(context).height *
-                                              0.11848,
-                                          100.0,
+                                        constraints: const BoxConstraints(
+                                          minHeight: 124.0,
                                         ),
                                         decoration: BoxDecoration(
                                           color: FlutterFlowTheme.of(context)
@@ -299,23 +297,20 @@ class _Retiro2newCopyWidgetState extends State<Retiro2newCopyWidget>
                                         child: Stack(
                                           children: [
                                             Column(
-                                              mainAxisSize: MainAxisSize.max,
+                                              mainAxisSize: MainAxisSize.min,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.stretch,
                                               children: [
                                                 Row(
-                                                  mainAxisSize:
-                                                      MainAxisSize.max,
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment
-                                                          .spaceBetween,
                                                   crossAxisAlignment:
                                                       CrossAxisAlignment.start,
                                                   children: [
                                                     Padding(
                                                       padding:
-                                                          EdgeInsetsDirectional
+                                                          const EdgeInsetsDirectional
                                                               .fromSTEB(
                                                                   0.0,
-                                                                  14.0,
+                                                                  12.0,
                                                                   0.0,
                                                                   0.0),
                                                       child: Row(
@@ -439,17 +434,15 @@ class _Retiro2newCopyWidgetState extends State<Retiro2newCopyWidget>
                                                                     child:
                                                                         Container(
                                                                       width:
-                                                                          100.0,
+                                                                          8.0,
                                                                       height:
-                                                                          100.0,
+                                                                          8.0,
                                                                       decoration:
                                                                           BoxDecoration(
                                                                         color: FlutterFlowTheme.of(context)
                                                                             .customColor4,
                                                                         borderRadius:
                                                                             BorderRadius.circular(24.0),
-                                                                        shape: BoxShape
-                                                                            .rectangle,
                                                                       ),
                                                                     ),
                                                                   ),

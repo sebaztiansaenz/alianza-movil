@@ -4,6 +4,21 @@
   <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" android:maxSdkVersion="32" tools:replace="android:maxSdkVersion"/>
   <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" android:maxSdkVersion="32" tools:replace="android:maxSdkVersion"/>
   <uses-permission android:name="android.permission.USE_FINGERPRINT"/>
+  <!-- Android 11+: sin esto canLaunchUrl/launchUrl fallan para https (ZapSign, etc.) -->
+  <queries>
+    <intent>
+      <action android:name="android.intent.action.VIEW"/>
+      <data android:scheme="https"/>
+    </intent>
+    <intent>
+      <action android:name="android.intent.action.VIEW"/>
+      <data android:scheme="http"/>
+    </intent>
+    <intent>
+      <action android:name="android.intent.action.VIEW"/>
+      <data android:scheme="alianza"/>
+    </intent>
+  </queries>
   <application
     android:label="Alianza"
     tools:replace="android:label"

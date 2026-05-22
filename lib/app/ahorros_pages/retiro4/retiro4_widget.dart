@@ -306,7 +306,10 @@ class _Retiro4WidgetState extends State<Retiro4Widget>
                                                           0.0, 0.0, 0.0, 0.0),
                                                   child: Container(
                                                     width: double.infinity,
-                                                    height: 98.0,
+                                                    constraints:
+                                                        const BoxConstraints(
+                                                      minHeight: 112.0,
+                                                    ),
                                                     decoration: BoxDecoration(
                                                       color: FlutterFlowTheme
                                                               .of(context)

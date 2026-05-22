@@ -14,3 +14,5 @@ export 'floating_nav_bar_scroll.dart'
         FloatingNavBarScrollScope;
 export 'floating_nav_bar_screen_stack.dart' show FloatingNavBarScreenStack;
 export 'main_tab_shell.dart' show MainTabShell;
+export 'ahorro_cuenta_card.dart'
+    show AhorroCuentaCard, kAhorroCuentaCardMinHeight;

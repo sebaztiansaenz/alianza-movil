@@ -1031,13 +1031,17 @@ class _AHORROSPage1CopyCopyWidgetState extends State<AHORROSPage1CopyCopyWidget>
                                                           AlignmentDirectional(
                                                               0.0, 0.0),
                                                       child: Container(
-                                                        height: valueOrDefault<
-                                                            double>(
-                                                          MediaQuery.sizeOf(
-                                                                      context)
-                                                                  .height *
-                                                              0.226,
-                                                          191.0,
+                                                        constraints:
+                                                            BoxConstraints(
+                                                          minHeight:
+                                                              valueOrDefault<
+                                                                  double>(
+                                                            MediaQuery.sizeOf(
+                                                                        context)
+                                                                    .height *
+                                                                0.226,
+                                                            191.0,
+                                                          ),
                                                         ),
                                                         decoration:
                                                             BoxDecoration(
@@ -1051,19 +1055,16 @@ class _AHORROSPage1CopyCopyWidgetState extends State<AHORROSPage1CopyCopyWidget>
                                                             Column(
                                                               mainAxisSize:
                                                                   MainAxisSize
-                                                                      .max,
-                                                              mainAxisAlignment:
-                                                                  MainAxisAlignment
-                                                                      .spaceBetween,
+                                                                      .min,
+                                                              crossAxisAlignment:
+                                                                  CrossAxisAlignment
+                                                                      .stretch,
                                                               children: [
                                                                 Container(
-                                                                  height:
-                                                                      valueOrDefault<
-                                                                          double>(
-                                                                    MediaQuery.sizeOf(context)
-                                                                            .height *
-                                                                        0.17773,
-                                                                    150.0,
+                                                                  constraints:
+                                                                      const BoxConstraints(
+                                                                    minHeight:
+                                                                        132.0,
                                                                   ),
                                                                   decoration:
                                                                       BoxDecoration(
@@ -1100,14 +1101,14 @@ class _AHORROSPage1CopyCopyWidgetState extends State<AHORROSPage1CopyCopyWidget>
                                                                   child: Column(
                                                                     mainAxisSize:
                                                                         MainAxisSize
-                                                                            .max,
+                                                                            .min,
                                                                     mainAxisAlignment:
                                                                         MainAxisAlignment
-                                                                            .spaceBetween,
+                                                                            .start,
                                                                     children: [
                                                                       Column(
                                                                         mainAxisSize:
-                                                                            MainAxisSize.max,
+                                                                            MainAxisSize.min,
                                                                         crossAxisAlignment:
                                                                             CrossAxisAlignment.start,
                                                                         children: [
@@ -1124,27 +1125,26 @@ class _AHORROSPage1CopyCopyWidgetState extends State<AHORROSPage1CopyCopyWidget>
                                                                               children: [
                                                                                 Image.asset(
                                                                                   'assets/images/Group_3_(1).png',
-                                                                                  height: valueOrDefault<double>(
-                                                                                    MediaQuery.sizeOf(context).height * 0.02370,
-                                                                                    20.0,
-                                                                                  ),
+                                                                                  height: 20.0,
                                                                                   fit: BoxFit.contain,
                                                                                 ),
-                                                                                AutoSizeText(
-                                                                                  lineahorroItem.savingsType,
-                                                                                  textAlign: TextAlign.start,
-                                                                                  maxLines: 2,
-                                                                                  minFontSize: 10.0,
-                                                                                  style: FlutterFlowTheme.of(context).bodyMedium.override(
-                                                                                        fontFamily: 'Satoshi',
-                                                                                        color: FlutterFlowTheme.of(context).secondaryBackground,
-                                                                                        fontSize: valueOrDefault<double>(
-                                                                                          MediaQuery.sizeOf(context).height * 0.01659,
-                                                                                          14.0,
+                                                                                Expanded(
+                                                                                  child: AutoSizeText(
+                                                                                    lineahorroItem.savingsType,
+                                                                                    textAlign: TextAlign.start,
+                                                                                    maxLines: 2,
+                                                                                    minFontSize: 10.0,
+                                                                                    style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                          fontFamily: 'Satoshi',
+                                                                                          color: FlutterFlowTheme.of(context).secondaryBackground,
+                                                                                          fontSize: valueOrDefault<double>(
+                                                                                            MediaQuery.sizeOf(context).height * 0.01659,
+                                                                                            14.0,
+                                                                                          ),
+                                                                                          letterSpacing: 0.0,
+                                                                                          fontWeight: FontWeight.bold,
                                                                                         ),
-                                                                                        letterSpacing: 0.0,
-                                                                                        fontWeight: FontWeight.bold,
-                                                                                      ),
+                                                                                  ),
                                                                                 ),
                                                                               ].divide(SizedBox(width: 8.0)),
                                                                             ),

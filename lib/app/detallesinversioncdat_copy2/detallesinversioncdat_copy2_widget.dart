@@ -68,7 +68,10 @@ class _DetallesinversioncdatCopy2WidgetState
       alignment: AlignmentDirectional(0.0, 1.0),
       child: Container(
         width: MediaQuery.sizeOf(context).width * 1.0,
-        height: MediaQuery.sizeOf(context).height * 0.35,
+        constraints: BoxConstraints(
+          maxHeight: MediaQuery.sizeOf(context).height * 0.42,
+          minHeight: 280.0,
+        ),
         decoration: BoxDecoration(
           color: FlutterFlowTheme.of(context).secondaryBackground,
           borderRadius: BorderRadius.only(
@@ -114,17 +117,20 @@ class _DetallesinversioncdatCopy2WidgetState
               Expanded(
                 child: Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(0.0, 32.0, 0.0, 0.0),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Expanded(
-                        child: Column(
-                          mainAxisSize: MainAxisSize.max,
+                  child: SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        SizedBox(
+                          width: 108.0,
+                          child: Column(
+                          mainAxisSize: MainAxisSize.min,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Row(
-                              mainAxisSize: MainAxisSize.max,
+                              mainAxisSize: MainAxisSize.min,
                               children: [
                                 ClipRRect(
                                   borderRadius: BorderRadius.circular(0.0),
@@ -182,19 +188,16 @@ class _DetallesinversioncdatCopy2WidgetState
                             ),
                           ],
                         ),
-                      ),
-                      Expanded(
-                        child: Align(
-                          alignment: AlignmentDirectional(0.0, -1.0),
-                          child: Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                4.0, 0.0, 0.0, 0.0),
-                            child: Column(
-                              mainAxisSize: MainAxisSize.max,
+                        ),
+                        const SizedBox(width: 10.0),
+                        SizedBox(
+                          width: 96.0,
+                          child: Column(
+                              mainAxisSize: MainAxisSize.min,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Row(
-                                  mainAxisSize: MainAxisSize.max,
+                                  mainAxisSize: MainAxisSize.min,
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     ClipRRect(
@@ -249,19 +252,16 @@ class _DetallesinversioncdatCopy2WidgetState
                                 ),
                               ],
                             ),
-                          ),
                         ),
-                      ),
-                      Expanded(
-                        child: Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
-                              4.0, 0.0, 0.0, 0.0),
+                        const SizedBox(width: 10.0),
+                        SizedBox(
+                          width: 118.0,
                           child: Column(
-                            mainAxisSize: MainAxisSize.max,
+                            mainAxisSize: MainAxisSize.min,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Row(
-                                mainAxisSize: MainAxisSize.max,
+                                mainAxisSize: MainAxisSize.min,
                                 children: [
                                   ClipRRect(
                                     borderRadius: BorderRadius.circular(0.0),
@@ -272,7 +272,8 @@ class _DetallesinversioncdatCopy2WidgetState
                                       fit: BoxFit.cover,
                                     ),
                                   ),
-                                  AutoSizeText(
+                                  Flexible(
+                                    child: AutoSizeText(
                                     valueOrDefault<String>(
                                       functions
                                           .sumarmeses(
@@ -290,20 +291,17 @@ class _DetallesinversioncdatCopy2WidgetState
                                         .bodyMedium
                                         .override(
                                           fontFamily: 'Satoshi',
-                                          fontSize: valueOrDefault<double>(
-                                            MediaQuery.sizeOf(context).height *
-                                                0.01659,
-                                            14.0,
-                                          ),
+                                          fontSize: 12.0,
                                           letterSpacing: 0.0,
                                           fontWeight: FontWeight.w500,
                                         ),
+                                  ),
                                   ),
                                 ].divide(SizedBox(width: 6.0)),
                               ),
                               Padding(
                                 padding: EdgeInsetsDirectional.fromSTEB(
-                                    14.0, 4.0, 0.0, 0.0),
+                                    0.0, 4.0, 0.0, 0.0),
                                 child: AutoSizeText(
                                   'Fecha de \nfinalización',
                                   textAlign: TextAlign.start,
@@ -321,28 +319,28 @@ class _DetallesinversioncdatCopy2WidgetState
                             ],
                           ),
                         ),
-                      ),
-                    ].addToStart(SizedBox(width: 12.0)),
+                      ],
+                    ),
                   ),
                 ),
               ),
               Expanded(
                 child: Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 20.0),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Expanded(
-                        child: Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
-                              12.0, 0.0, 0.0, 0.0),
+                  child: SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        SizedBox(
+                          width: 118.0,
                           child: Column(
-                            mainAxisSize: MainAxisSize.max,
+                            mainAxisSize: MainAxisSize.min,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Row(
-                                mainAxisSize: MainAxisSize.max,
+                                mainAxisSize: MainAxisSize.min,
                                 children: [
                                   ClipRRect(
                                     borderRadius: BorderRadius.circular(0.0),
@@ -432,17 +430,15 @@ class _DetallesinversioncdatCopy2WidgetState
                             ],
                           ),
                         ),
-                      ),
-                      Expanded(
-                        child: Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
-                              4.0, 0.0, 0.0, 0.0),
+                        const SizedBox(width: 10.0),
+                        SizedBox(
+                          width: 100.0,
                           child: Column(
-                            mainAxisSize: MainAxisSize.max,
+                            mainAxisSize: MainAxisSize.min,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Row(
-                                mainAxisSize: MainAxisSize.max,
+                                mainAxisSize: MainAxisSize.min,
                                 children: [
                                   ClipRRect(
                                     borderRadius: BorderRadius.circular(0.0),
@@ -499,20 +495,17 @@ class _DetallesinversioncdatCopy2WidgetState
                             ],
                           ),
                         ),
-                      ),
-                      Expanded(
-                        child: Column(
-                          mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.start,
+                        const SizedBox(width: 10.0),
+                        SizedBox(
+                          width: 118.0,
+                          child: Column(
+                          mainAxisSize: MainAxisSize.min,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Row(
-                              mainAxisSize: MainAxisSize.max,
-                              mainAxisAlignment: MainAxisAlignment.start,
+                              mainAxisSize: MainAxisSize.min,
                               children: [
-                                Align(
-                                  alignment: AlignmentDirectional(-1.0, 0.0),
-                                  child: ClipRRect(
+                                ClipRRect(
                                     borderRadius: BorderRadius.circular(0.0),
                                     child: Image.asset(
                                       'assets/images/Vector_(32).png',
@@ -520,9 +513,9 @@ class _DetallesinversioncdatCopy2WidgetState
                                       height: 20.0,
                                       fit: BoxFit.cover,
                                     ),
-                                  ),
                                 ),
-                                AutoSizeText(
+                                Flexible(
+                                  child: AutoSizeText(
                                   valueOrDefault<String>(
                                     functions.formatAmount(widget!.tiempo == '6'
                                         ? valueOrDefault<double>(
@@ -571,6 +564,7 @@ class _DetallesinversioncdatCopy2WidgetState
                                         fontWeight: FontWeight.w500,
                                       ),
                                 ),
+                                ),
                               ].divide(SizedBox(width: 6.0)),
                             ),
                             Padding(
@@ -592,8 +586,9 @@ class _DetallesinversioncdatCopy2WidgetState
                             ),
                           ],
                         ),
-                      ),
-                    ],
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),
