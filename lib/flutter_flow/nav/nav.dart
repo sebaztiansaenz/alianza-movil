@@ -1379,11 +1379,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => ModalCopyCopy2Widget(),
         ),
         FFRoute(
-          name: HomeInversionesWidget.routeName,
-          path: HomeInversionesWidget.routePath,
-          builder: (context, params) => HomeInversionesWidget(),
-        ),
-        FFRoute(
           name: MisinversionesWidget.routeName,
           path: MisinversionesWidget.routePath,
           asyncParams: {

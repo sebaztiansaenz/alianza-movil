@@ -193,8 +193,6 @@ export '/app/ahorros_pages/modal_copy_copy/modal_copy_copy_widget.dart'
     show ModalCopyCopyWidget;
 export '/app/ahorros_pages/modal_copy_copy2/modal_copy_copy2_widget.dart'
     show ModalCopyCopy2Widget;
-export '/app/appcdat/home_inversiones/home_inversiones_widget.dart'
-    show HomeInversionesWidget;
 export '/app/appcdat/simulador_cdat_standalone/simulador_cdat_standalone_widget.dart'
     show SimuladorCdatStandaloneWidget;
 export '/app/appcdat/misinversiones/misinversiones_widget.dart'

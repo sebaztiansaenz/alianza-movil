@@ -1527,7 +1527,7 @@ class _AHORROSPage1CopyWidgetState extends State<AHORROSPage1CopyWidget>
                                     highlightColor: Colors.transparent,
                                     onTap: () async {
                                       context.pushNamed(
-                                        HomeInversionesWidget.routeName,
+                                        MisinversionesWidget.routeName,
                                         extra: <String, dynamic>{
                                           '__transition_info__': TransitionInfo(
                                             hasTransition: true,
@@ -1537,19 +1537,75 @@ class _AHORROSPage1CopyWidgetState extends State<AHORROSPage1CopyWidget>
                                         },
                                       );
                                     },
-                                    child: ClipRRect(
-                                      borderRadius: BorderRadius.circular(12.0),
-                                      child: Image.asset(
-                                        'assets/images/Frame_2085662699.png',
-                                        width:
-                                            MediaQuery.sizeOf(context).width *
-                                                1.0,
-                                        height: valueOrDefault<double>(
-                                          MediaQuery.sizeOf(context).height *
-                                              0.09480,
-                                          80.0,
+                                    child: Container(
+                                      width:
+                                          MediaQuery.sizeOf(context).width * 1.0,
+                                      height: valueOrDefault<double>(
+                                        MediaQuery.sizeOf(context).height *
+                                            0.09480,
+                                        80.0,
+                                      ),
+                                      decoration: BoxDecoration(
+                                        color: FlutterFlowTheme.of(context)
+                                            .secondaryBackground,
+                                        borderRadius:
+                                            BorderRadius.circular(12.0),
+                                        border: Border.all(
+                                          color: const Color(0xFFFF8A00),
+                                          width: 1.2,
                                         ),
-                                        fit: BoxFit.contain,
+                                        boxShadow: const [
+                                          BoxShadow(
+                                            color: Color(0x14000000),
+                                            blurRadius: 12.0,
+                                            offset: Offset(0.0, 4.0),
+                                          ),
+                                        ],
+                                      ),
+                                      child: Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                          horizontal: 16.0,
+                                        ),
+                                        child: Row(
+                                          children: [
+                                            Container(
+                                              width: 44.0,
+                                              height: 44.0,
+                                              decoration: const BoxDecoration(
+                                                color: Color(0xFFFF8A00),
+                                                shape: BoxShape.circle,
+                                              ),
+                                              child: Icon(
+                                                Icons.currency_bitcoin,
+                                                color: Colors.white,
+                                                size: 26.0,
+                                              ),
+                                            ),
+                                            const SizedBox(width: 14.0),
+                                            Expanded(
+                                              child: Text(
+                                                'Inversiones',
+                                                style:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMedium
+                                                        .override(
+                                                          fontFamily: 'Satoshi',
+                                                          fontSize: 16.0,
+                                                          letterSpacing: 0.0,
+                                                          fontWeight:
+                                                              FontWeight.w700,
+                                                        ),
+                                              ),
+                                            ),
+                                            Icon(
+                                              Icons.arrow_forward_ios_rounded,
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .secondaryText,
+                                              size: 18.0,
+                                            ),
+                                          ],
+                                        ),
                                       ),
                                     ),
                                   ),
