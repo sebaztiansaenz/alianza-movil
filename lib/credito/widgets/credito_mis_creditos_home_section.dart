@@ -144,7 +144,7 @@ class CreditoMisCreditosHomeSection extends StatelessWidget {
   }
 }
 
-/// Fila tarjeta + menú lateral; el botón ⋮ muestra u oculta el carrusel de atajos.
+/// Fila tarjeta + menú lateral; el botón ⋮ muestra u oculta los atajos.
 class _CreditoMisCreditosDashboardRow extends StatefulWidget {
   const _CreditoMisCreditosDashboardRow({
     required this.perfilCredito,
@@ -228,9 +228,8 @@ class _CreditoMisCreditosDashboardRowState
                     : widget.emptyPlaceholder,
               ),
               SizedBox(
-                width: _sidebarVisible
-                    ? CreditoDashboardMetrics.columnGap
-                    : 0,
+                width:
+                    _sidebarVisible ? CreditoDashboardMetrics.columnGap : 0,
               ),
               CreditoQuickActionsRail(
                 visible: _sidebarVisible,

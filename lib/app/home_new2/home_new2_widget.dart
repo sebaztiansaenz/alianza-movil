@@ -1367,7 +1367,7 @@ class _HomeNew2WidgetState extends State<HomeNew2Widget>
                                         highlightColor: Colors.transparent,
                                         onTap: () async {
                                           context.pushNamed(
-                                            HomeInversionesWidget.routeName,
+                                            MisinversionesWidget.routeName,
                                             extra: <String, dynamic>{
                                               '__transition_info__':
                                                   TransitionInfo(
